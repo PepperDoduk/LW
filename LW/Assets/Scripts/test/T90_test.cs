@@ -37,7 +37,8 @@ public class T90_test : MonoBehaviour
 
         if (HP < 0)
         {
-            AudioManager.instance.PlaySfx(AudioManager.Sfx.TankDestroy);
+            //AudioManager.instance.PlaySfx(AudioManager.Sfx.TankDestroy);
+            Audiomanager_prototype.instance.PlaySfx(Audiomanager_prototype.Sfx.TankDestroy);
             Destroy(gameObject, 0.3f);
         }
         GameObject[] targets = GameObject.FindGameObjectsWithTag(targetTag);
@@ -80,7 +81,8 @@ public class T90_test : MonoBehaviour
         if (ammo35mm > 0)
         {
             ammo35mm = 0;
-            AudioManager.instance.PlaySfx(AudioManager.Sfx.PKM);
+            //AudioManager.instance.PlaySfx(AudioManager.Sfx.PKM);
+            Audiomanager_prototype.instance.PlaySfx(Audiomanager_prototype.Sfx.PKM);
 
             for (int i = 0; i < 19; i++)
             {
