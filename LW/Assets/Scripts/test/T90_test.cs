@@ -6,10 +6,11 @@ public class T90_test : MonoBehaviour
 {
     [SerializeField] private GameObject T90muzzleFlashPrefab;
     [SerializeField] private GameObject muzzleFlashPrefab;
+    [SerializeField] private GameObject bombPrefab;
 
     public string targetTag = "Enemy";
     public float moveSpeed = 0f;
-    public float distance;
+    private float distance;
     public float intersection = 0f;
 
     public Animator anim;
@@ -20,15 +21,11 @@ public class T90_test : MonoBehaviour
 
     private bool isAttacking = false;
 
-    public GameObject bomb;
+    //public GameObject bomb; 프리팹 안씀ㅇㅇ
     void Start()
     {
         anim = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
-        HP = 3000;
-        moveSpeed = 0.8f;
-        AttackCoolTime = 3f;
-        intersection = 10f;
         anim.SetInteger("T90_anim", (int)1);
     }
 
@@ -118,7 +115,9 @@ public class T90_test : MonoBehaviour
     public void PlaySound()
     {
         audioSource.Play();
-        Instantiate(bomb, new Vector3(transform.position.x+2, transform.position.y + 1.62f, 3), Quaternion.identity);
+        //Instantiate(bomb, new Vector3(transform.position.x+2, transform.position.y + 1.62f, 3), Quaternion.identity);  이건 예전 코드라 주석처리함
+        GameObject ammo = ObjectPoolManager.Instance.GetObjectFromPool(bombPrefab, Quaternion.identity, new Vector3(1f, 1f, 1)); //새로 만든 오브젝트 풀 방식으로 교체
+        ammo.transform.position = new Vector3(transform.position.x + 2f, transform.position.y + 1.62f, 3);
     }
 
     public void MinusHealthPoint(float atk)
