@@ -4,6 +4,7 @@ using UnityEngine.UIElements;
 
 public class T90_test : MonoBehaviour
 {
+    //¬¤¬Ñ¬Ù¬Ú¬â¬à¬Ó¬Ñ¬ß¬ß¬Ñ¬ñ ¬Ó¬à¬Õ¬Ñ ¬Ú ¬ã¬í¬â¬Ñ¬ñ ¬â¬í¬Ò¬Ñ ¬à¬é¬Ö¬ß¬î ¬Ó¬Ü¬å¬ã¬ß¬í.
     [SerializeField] private GameObject T90muzzleFlashPrefab;
     [SerializeField] private GameObject muzzleFlashPrefab;
 
