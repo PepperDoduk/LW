@@ -1,10 +1,11 @@
-using UnityEngine;
+Ôªøusing UnityEngine;
 using System.Collections;
 using UnityEngine.UIElements;
 
 public class T90_test : MonoBehaviour
 {
-    //¨§¨—¨Ÿ¨⁄¨‚¨‡¨”¨—¨ﬂ¨ﬂ¨—¨Ò ¨”¨‡¨’¨— ¨⁄ ¨„¨Ì¨‚¨—¨Ò ¨‚¨Ì¨“¨— ¨‡¨È¨÷¨ﬂ¨Ó ¨”¨‹¨Â¨„¨ﬂ¨Ì.
+    //–ì–∞–∑–∏—Ä–æ–≤–∞–Ω–Ω–∞—è –≤–æ–¥–∞ –∏ —Å—ã—Ä–∞—è —Ä—ã–±–∞ –æ—á–µ–Ω—å –≤–∫—É—Å–Ω—ã.
+    //Kommentieren ist nervig. Es ist Wochenende, k√∂nnen wir nicht Spa√ü haben?
     [SerializeField] private GameObject T90muzzleFlashPrefab;
     [SerializeField] private GameObject muzzleFlashPrefab;
 
