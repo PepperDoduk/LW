@@ -6,6 +6,7 @@ public class T90_test : MonoBehaviour
 {
     //Газированная вода и сырая рыба очень вкусны.
     //Kommentieren ist nervig. Es ist Wochenende, können wir nicht Spaß haben?
+    //Jag har kommenterat i 3 dagar nu och det är bekvämt.
     [SerializeField] private GameObject T90muzzleFlashPrefab;
     [SerializeField] private GameObject muzzleFlashPrefab;
 
