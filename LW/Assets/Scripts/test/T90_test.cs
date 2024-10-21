@@ -4,15 +4,11 @@ using UnityEngine.UIElements;
 
 public class T90_test : MonoBehaviour
 {
-    //Газированная вода и сырая рыба очень вкусны.
-    //Kommentieren ist nervig. Es ist Wochenende, können wir nicht Spaß haben?
-    //Jag har kommenterat i 3 dagar nu och det är bekvämt.
-    //Commentaar schrijven is een gedoe... Ik heb morgen tekeningen, dus ik zal mijn werk vanaf morgen moeten normaliseren.
     [SerializeField] private GameObject T90muzzleFlashPrefab;
     [SerializeField] private GameObject muzzleFlashPrefab;
 
     public string targetTag = "Enemy";
-    public float moveSpeed = 0f;
+    public float moveSpeed = 2f;
     public float distance;
     public float intersection = 0f;
 
@@ -29,10 +25,6 @@ public class T90_test : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
-        HP = 3000;
-        moveSpeed = 0.8f;
-        AttackCoolTime = 3f;
-        intersection = 10f;
         anim.SetInteger("T90_anim", (int)1);
     }
 
@@ -43,8 +35,18 @@ public class T90_test : MonoBehaviour
         {
             //AudioManager.instance.PlaySfx(AudioManager.Sfx.TankDestroy);
             Audiomanager_prototype.instance.PlaySfx(Audiomanager_prototype.Sfx.TankDestroy);
-            Destroy(gameObject, 0.3f);
+            //Destroy(gameObject, 0.3f);
+            StartCoroutine(ReturnToPoolAfterDelay(0.3f));
         }
+
+
+        IEnumerator ReturnToPoolAfterDelay(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            GetComponent<ObjectPool>().Deactivate();
+        }
+
+
         GameObject[] targets = GameObject.FindGameObjectsWithTag(targetTag);
 
         float closestDistance = Mathf.Infinity;

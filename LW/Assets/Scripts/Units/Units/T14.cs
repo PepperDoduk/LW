@@ -20,7 +20,7 @@ public class T14 : MonoBehaviour
 
     void Start()
     {
-        AudioManager.instance.PlaySfx(AudioManager.Sfx.TankMove);
+        Audiomanager_prototype.instance.PlaySfx(Audiomanager_prototype.Sfx.TankMove);
         anim = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         HP = 5000;
@@ -34,7 +34,7 @@ public class T14 : MonoBehaviour
     {
         if (HP < 0)
         {
-            AudioManager.instance.PlaySfx(AudioManager.Sfx.TankDestroy);
+            Audiomanager_prototype.instance.PlaySfx(Audiomanager_prototype.Sfx.TankDestroy);
             Destroy(gameObject, 0.3f);
         }
 

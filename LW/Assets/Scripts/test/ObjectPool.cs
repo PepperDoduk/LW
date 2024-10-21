@@ -11,13 +11,22 @@ public class ObjectPool : MonoBehaviour
     public void Init()
     {
         // disableTime 후 풀로 반환
-        StartCoroutine(ReturnToPoolAfterDelay(disableTime));
+        if (disableTime != -1)
+        {
+            StartCoroutine(ReturnToPoolAfterDelay(disableTime));
+        }
+        else if(disableTime == -1)
+        {
+           
+        }
     }
 
     // 오브젝트 비활성화
     public void Deactivate()
     {
+        ObjectPoolManager.Instance.ReturnObjectToPool(prefab, gameObject);
         gameObject.SetActive(false);
+        
     }
 
     // 일정 시간이 지나면 풀로 반환함

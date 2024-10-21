@@ -27,7 +27,7 @@ public class EnemyTank_125mm : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Unit"))
         {
-            AudioManager.instance.PlaySfx(AudioManager.Sfx.TankHit);
+            Audiomanager_prototype.instance.PlaySfx(Audiomanager_prototype.Sfx.TankHit);
             Destroy(gameObject);
         }
     }
