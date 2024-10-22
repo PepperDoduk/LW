@@ -6,10 +6,10 @@ using UnityEngine.UI;
 public class Unit_production : MonoBehaviour
 {
     public Button productionButton;
-    public GameObject Unit;
-    public float x;
-    public float y;
-    public float z;
+    public Vector3 location;
+    public Vector3 size;
+
+    public GameObject unitPrefab;
 
     public int prod_needMoney;
 
@@ -50,7 +50,10 @@ public class Unit_production : MonoBehaviour
             {
                 Debug.Log("Unit production Start!");
                 money.AddMoney(-prod_needMoney);
-                Instantiate(Unit, new Vector3(x, y, z), Quaternion.identity);
+                //Instantiate(Unit, new Vector3(x, y, z), Quaternion.identity);
+                GameObject unit = ObjectPoolManager.Instance.GetObjectFromPool(unitPrefab, Quaternion.identity, size);
+                unit.transform.position = location;
+
                 Debug.Log("Unit production Success");
 
                 productionButton.interactable = false;

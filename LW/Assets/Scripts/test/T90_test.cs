@@ -81,12 +81,12 @@ public class T90_test : MonoBehaviour
         }
     }
 
-    public int ammo35mm = 1;
+    public int ammo7_62mm = 1;
     public IEnumerator Fire12mm()
     {
-        if (ammo35mm > 0)
+        if (ammo7_62mm > 0)
         {
-            ammo35mm = 0;
+            ammo7_62mm = 0;
             //AudioManager.instance.PlaySfx(AudioManager.Sfx.PKM);
             Audiomanager_prototype.instance.PlaySfx(Audiomanager_prototype.Sfx.PKM);
 
@@ -100,7 +100,7 @@ public class T90_test : MonoBehaviour
 
             yield return new WaitForSeconds(6f);
 
-            ammo35mm = 1;
+            ammo7_62mm = 1;
         }
     }
 

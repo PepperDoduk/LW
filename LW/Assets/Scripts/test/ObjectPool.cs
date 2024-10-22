@@ -24,7 +24,6 @@ public class ObjectPool : MonoBehaviour
     // 오브젝트 비활성화
     public void Deactivate()
     {
-        ObjectPoolManager.Instance.ReturnObjectToPool(prefab, gameObject);
         gameObject.SetActive(false);
         
     }

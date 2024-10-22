@@ -7,7 +7,7 @@ public class CameraManager : MonoBehaviour
     public Vector2 minCameraBoundary;
     public Vector2 maxCameraBoundary;
 
-    public float zoomSpeed = 10.0f;
+    public float zoomSpeed = 6.0f;
 
     public Camera mainCamera;
 
@@ -19,7 +19,7 @@ public class CameraManager : MonoBehaviour
     {
 
         float horizontalInput = Input.GetAxis("Horizontal");
-        Vector3 moveDirection = new Vector3(horizontalInput, 0, 0f).normalized;
+        Vector3 moveDirection = new Vector3(horizontalInput, 10, 0f).normalized;
         MoveFreeCamera(moveDirection);
         Zoom();
        
@@ -27,12 +27,12 @@ public class CameraManager : MonoBehaviour
 
     private void MoveFreeCamera(Vector3 moveDirection)
     {
-        Vector3 newPosition = transform.position + moveDirection * 10 * Time.deltaTime;
+        Vector3 newPosition = transform.position + moveDirection * 170 * Time.deltaTime;
 
         float clampedX = Mathf.Clamp(newPosition.x, minCameraBoundary.x, maxCameraBoundary.x);
-        float clampedY = Mathf.Clamp(newPosition.y, minCameraBoundary.y, maxCameraBoundary.y);
+        //float clampedY = Mathf.Clamp(newPosition.y, minCameraBoundary.y, maxCameraBoundary.y);
 
-        transform.position = new Vector3(clampedX, clampedY, transform.position.z);
+        transform.position = new Vector3(clampedX, /*clampedY*/ -10, transform.position.z);
     }
 
     private void Zoom()
