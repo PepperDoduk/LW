@@ -2834,7 +2834,7 @@ MonoBehaviour:
   Unit1: {fileID: 3709025904584510162, guid: 6c915251538b9c242ba3545049cf73e3, type: 3}
   Unit2: {fileID: 3839695595042538440, guid: 2896645451acc424d949bd779375da2c, type: 3}
   x: 70
-  y: -4.5
+  y: -10
   z: 0
   prod_needMoney: 0
   money: {fileID: 0}
