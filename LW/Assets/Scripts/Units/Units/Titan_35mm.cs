@@ -3,11 +3,12 @@ using UnityEngine;
 public class Titan_35mm : MonoBehaviour
 {
     public AudioSource audioSource;
+    public ObjectPool objectPool;
 
     void Start()
     {
-        Fire35mm();
         audioSource = GetComponent<AudioSource>();
+
         
     }
 
@@ -17,17 +18,13 @@ public class Titan_35mm : MonoBehaviour
         transform.Translate(movement* Time.deltaTime);
     }
 
-    void Fire35mm()
-    {
-        Destroy(gameObject, 1f);
-    }
-
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            AudioManager.instance.PlaySfx(AudioManager.Sfx.TankHit);
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            objectPool.ReturnToPoolAfterDelay(0);
+            objectPool.Deactivate();
         }
     }
 }

@@ -15,6 +15,14 @@ public class Titan_II : MonoBehaviour
     public Vector3 sizeOfMuzzleFlash;
     public Vector3 locationOfMuzzleFlash;
 
+    public Vector3 sizeOfBullet35;
+    public Vector3 locationOfBullet35;
+
+    public Vector3 sizeOfMuzzleFlash35;
+    public Vector3 locationOfMuzzleFlash35;
+
+    public Vector3 sizeOfMissle;
+    public Vector3 locationOfMissle;
 
     public int animNum = 0;
 
@@ -29,9 +37,10 @@ public class Titan_II : MonoBehaviour
     private bool isAttacking = false;
 
     public GameObject bombPrefab;
-    public GameObject bullet;
+    public GameObject bulletPrefab;
 
     [SerializeField] private GameObject titanMuzzleFlashPrefab;
+    [SerializeField] private GameObject MuzzleFlashPrefab;
 
     public int ammo = 1;
 
@@ -68,7 +77,7 @@ public class Titan_II : MonoBehaviour
 
         if (distance <= intersection)
         {
-            //StartCoroutine(Fire35mm());
+            StartCoroutine(Fire35mm());
             if (!isAttacking && ammo > 0)
             {
                 StartCoroutine(FireAndWait());
@@ -120,16 +129,21 @@ public class Titan_II : MonoBehaviour
             ammo--;
             audioSource.Play();
             //Instantiate(bomb, new Vector3(transform.position.x, transform.position.y + 7f, 0), Quaternion.identity);
-            GameObject unit = ObjectPoolManager.Instance.GetObjectFromPool(bombPrefab, Quaternion.identity, sizeOfBomb);
-            GameObject muzzleflash = ObjectPoolManager.Instance.GetObjectFromPool(titanMuzzleFlashPrefab, Quaternion.identity, sizeOfMuzzleFlash);
-            unit.transform.position = transform.position + locationOfBomb;
-            muzzleflash.transform.position = transform.position + locationOfMuzzleFlash;
-            yield return new WaitForSeconds(0.5f);
+
+            for (int i = 0; i < 2; ++i)
+            {
+                GameObject bomb = ObjectPoolManager.Instance.GetObjectFromPool(bombPrefab, Quaternion.identity, sizeOfBomb);
+                GameObject muzzleflash = ObjectPoolManager.Instance.GetObjectFromPool(titanMuzzleFlashPrefab, Quaternion.identity, sizeOfMuzzleFlash);
+                bomb.transform.position = transform.position + locationOfBomb;
+                muzzleflash.transform.position = transform.position + locationOfMuzzleFlash;
+                yield return new WaitForSeconds(0.5f);
+            }
+
             //Instantiate(bomb, new Vector3(transform.position.x, transform.position.y + 7f, 0), Quaternion.identity);
-            GameObject unit2 = ObjectPoolManager.Instance.GetObjectFromPool(bombPrefab, Quaternion.identity, sizeOfBomb);
+            /*GameObject bomb2 = ObjectPoolManager.Instance.GetObjectFromPool(bombPrefab, Quaternion.identity, sizeOfBomb);
             GameObject muzzleflash2 = ObjectPoolManager.Instance.GetObjectFromPool(titanMuzzleFlashPrefab, Quaternion.identity, sizeOfMuzzleFlash);
-            unit2.transform.position = transform.position + locationOfBomb;
-            muzzleflash2.transform.position = transform.position + locationOfMuzzleFlash;
+            bomb2.transform.position = transform.position + locationOfBomb;
+            muzzleflash2.transform.position = transform.position + locationOfMuzzleFlash;*/
         }
     }
 
@@ -146,10 +160,14 @@ public class Titan_II : MonoBehaviour
             ammo35mm = 0;
             Audiomanager_prototype.instance.PlaySfx(Audiomanager_prototype.Sfx.Titan35mm);
 
-            for (int i = 0; i < 35; i++)
+            for (int i = 0; i < 20; i++)
             {
-                Instantiate(bullet, new Vector3(transform.position.x, transform.position.y + 5.6f, 0), Quaternion.Euler(0, 0, Random.Range(-0.3f, 0.3f)));
-                yield return new WaitForSeconds(0.025f);
+                //Instantiate(bullet, new Vector3(transform.position.x, transform.position.y + 5.6f, 0), Quaternion.Euler(0, 0, Random.Range(-0.3f, 0.3f)));
+                GameObject b35mm = ObjectPoolManager.Instance.GetObjectFromPool(bulletPrefab, Quaternion.identity, sizeOfBullet35);
+                GameObject bmuzzleflash = ObjectPoolManager.Instance.GetObjectFromPool(MuzzleFlashPrefab, Quaternion.identity, sizeOfMuzzleFlash35);
+                b35mm.transform.position = transform.position + locationOfBullet35;
+                bmuzzleflash.transform.position = transform.position + locationOfMuzzleFlash35;
+                yield return new WaitForSeconds(0.06f);
             }
 
             yield return new WaitForSeconds(6f);

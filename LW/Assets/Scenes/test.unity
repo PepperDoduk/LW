@@ -35231,13 +35231,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTag: Enemy
-  moveSpeed: 1
+  moveSpeed: 1.4
   distance: 0
   intersection: 15
   sizeOfBomb: {x: 2, y: 1, z: 1}
   locationOfBomb: {x: 4, y: 3.8, z: 0}
   sizeOfMuzzleFlash: {x: 1, y: 1, z: 1}
   locationOfMuzzleFlash: {x: 4, y: 3.5, z: 0}
+  sizeOfBullet35: {x: 0.35, y: 0.35, z: 1}
+  locationOfBullet35: {x: 3, y: 3, z: 0}
+  sizeOfMuzzleFlash35: {x: 1, y: 1, z: 1}
+  locationOfMuzzleFlash35: {x: 3.7, y: 3.72, z: 0}
+  sizeOfMissle: {x: 0, y: 0, z: 0}
+  locationOfMissle: {x: 0, y: 0, z: 0}
   animNum: 0
   ammo35mm: 1
   anim: {fileID: 0}
@@ -35245,8 +35251,9 @@ MonoBehaviour:
   HP: 30000
   AttackCoolTime: 8
   bombPrefab: {fileID: 8683968501033214702, guid: c878bd18da05dd94ebf2a67835d68c08, type: 3}
-  bullet: {fileID: 8683968501033214702, guid: 30ce9b5a9366ec440a825740fbda54c1, type: 3}
+  bulletPrefab: {fileID: 8683968501033214702, guid: 30ce9b5a9366ec440a825740fbda54c1, type: 3}
   titanMuzzleFlashPrefab: {fileID: 8912767448822040767, guid: 4dad670181441ad49a879e7b1693a638, type: 3}
+  MuzzleFlashPrefab: {fileID: 8480172057056688032, guid: db8d4ffc7eba239489cecd56610cb365, type: 3}
   ammo: 1
 --- !u!82 &710907631
 AudioSource:
@@ -79727,7 +79734,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 6.9667153
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -85076,7 +85083,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4566914181329209115, guid: aa1d8a49d732d2f428839206ebfa797a, type: 3}
       propertyPath: pools.Array.size
-      value: 5
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4566914181329209115, guid: aa1d8a49d732d2f428839206ebfa797a, type: 3}
+      propertyPath: pools.Array.data[2].size
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 4566914181329209115, guid: aa1d8a49d732d2f428839206ebfa797a, type: 3}
       propertyPath: pools.Array.data[3].size
@@ -85087,6 +85098,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4566914181329209115, guid: aa1d8a49d732d2f428839206ebfa797a, type: 3}
+      propertyPath: pools.Array.data[5].size
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4566914181329209115, guid: aa1d8a49d732d2f428839206ebfa797a, type: 3}
       propertyPath: pools.Array.data[3].prefab
       value: 
       objectReference: {fileID: 8683968501033214702, guid: c878bd18da05dd94ebf2a67835d68c08, type: 3}
@@ -85094,6 +85109,10 @@ PrefabInstance:
       propertyPath: pools.Array.data[4].prefab
       value: 
       objectReference: {fileID: 8912767448822040767, guid: 4dad670181441ad49a879e7b1693a638, type: 3}
+    - target: {fileID: 4566914181329209115, guid: aa1d8a49d732d2f428839206ebfa797a, type: 3}
+      propertyPath: pools.Array.data[5].prefab
+      value: 
+      objectReference: {fileID: 8683968501033214702, guid: 30ce9b5a9366ec440a825740fbda54c1, type: 3}
     - target: {fileID: 6140242162743442643, guid: aa1d8a49d732d2f428839206ebfa797a, type: 3}
       propertyPath: m_Name
       value: ObjectPoolManager
