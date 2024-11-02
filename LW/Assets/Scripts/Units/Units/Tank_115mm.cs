@@ -3,10 +3,10 @@ using UnityEngine;
 public class Tank_115mm : MonoBehaviour
 {
     public AudioSource audioSource;
+    public ObjectPool objectPool;
 
     void Start()
     {
-        Fire115mm();
         audioSource = GetComponent<AudioSource>();
         
     }
@@ -17,19 +17,14 @@ public class Tank_115mm : MonoBehaviour
         transform.Translate(movement* Time.deltaTime);
     }
 
-    void Fire115mm()
-    {
-
-        Destroy(gameObject, 0.7f);
-    }
-
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("ÇÇÅº");
         if (other.gameObject.CompareTag("Enemy"))
         {
-            AudioManager.instance.PlaySfx(AudioManager.Sfx.TankHit);
-            Destroy(gameObject);
+            Audiomanager_prototype.instance.PlaySfx(Audiomanager_prototype.Sfx.TankHit);
+            //Destroy(gameObject);
+            objectPool.ReturnToPoolAfterDelay(0);
+            objectPool.Deactivate();
         }
     }
 }

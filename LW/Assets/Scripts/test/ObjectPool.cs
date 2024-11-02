@@ -29,7 +29,7 @@ public class ObjectPool : MonoBehaviour
     }
 
     // 일정 시간이 지나면 풀로 반환함
-    private IEnumerator ReturnToPoolAfterDelay(float t)
+    public IEnumerator ReturnToPoolAfterDelay(float t)
     {
         yield return new WaitForSeconds(t);
 

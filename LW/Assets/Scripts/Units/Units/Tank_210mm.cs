@@ -3,32 +3,31 @@ using UnityEngine;
 public class Tank_210mm : MonoBehaviour
 {
     public AudioSource audioSource;
+    public ObjectPool objectPool;
+
+    public float speed;
 
     void Start()
     {
-        Fire210mm();
         audioSource = GetComponent<AudioSource>();
         
     }
 
     void Update()
     {
-        Vector3 movement = new Vector3(65.0f, 0.0f, 0.0f);
+        Vector3 movement = new Vector3(speed, 0.0f, 0.0f);
         transform.Translate(movement* Time.deltaTime);
     }
 
-    void Fire210mm()
-    {
-
-        Destroy(gameObject, 2f);
-    }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            AudioManager.instance.PlaySfx(AudioManager.Sfx.TankHit);
-            Destroy(gameObject);
+            Audiomanager_prototype.instance.PlaySfx(Audiomanager_prototype.Sfx.TankHit);
+            //Destroy(gameObject);
+            objectPool.ReturnToPoolAfterDelay(0);
+            objectPool.Deactivate();
         }
     }
 }

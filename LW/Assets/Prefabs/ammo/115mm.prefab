@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 811580194509287690}
   - component: {fileID: 8442935712487688789}
   - component: {fileID: 6153229259234409839}
-  - component: {fileID: 8885080213185837497}
   - component: {fileID: 452758687704190354}
+  - component: {fileID: 8179251468295881378}
+  - component: {fileID: -771478358536272488}
   m_Layer: 0
   m_Name: 115mm
   m_TagString: 115mm
@@ -132,19 +133,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.3552339, y: 11.263887}
   m_EdgeRadius: 0
---- !u!114 &8885080213185837497
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8683968501033214702}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b41756c370f1559448ae00d63eafa3ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioSource: {fileID: 0}
 --- !u!50 &452758687704190354
 Rigidbody2D:
   serializedVersion: 4
@@ -172,3 +160,31 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &8179251468295881378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8683968501033214702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bad35b52f9f128340ab429e665a700cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
+  objectPool: {fileID: -771478358536272488}
+--- !u!114 &-771478358536272488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8683968501033214702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d8a184113f50a54f95468e47ed4b875, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 8683968501033214702}
+  disableTime: 5
