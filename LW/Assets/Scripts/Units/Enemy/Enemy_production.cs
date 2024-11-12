@@ -11,10 +11,6 @@ public class Enemy_production : MonoBehaviour
     public float y;
     public float z;
 
-    public int prod_needMoney;
-
-    public MoneyUI money;
-
     void Start()
     {
         InvokeRepeating("Enemy", 1f, Random.Range(5f, 15f));
@@ -26,11 +22,11 @@ public class Enemy_production : MonoBehaviour
 
         if (randomValue <= 79)
         {
-            Instantiate(Unit1, new Vector3(x, y, z), Quaternion.identity);
+            Instantiate(Unit1, new Vector3(transform.position.x + x, transform.position.y + y, 0), Quaternion.identity);
         }
         else
         {
-            Instantiate(Unit2, new Vector3(x, y, z), Quaternion.identity);
+            Instantiate(Unit2, new Vector3(transform.position.x + x, transform.position.y + y, 0), Quaternion.identity);
         }
     }
 }

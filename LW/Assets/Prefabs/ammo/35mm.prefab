@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 452758687704190354}
   - component: {fileID: 2795618491023108701}
   - component: {fileID: 6005078556746735351}
+  - component: {fileID: 8766205787935765181}
   m_Layer: 0
   m_Name: 35mm
   m_TagString: 35mm
@@ -120,7 +121,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -1.3907949, y: 2.309598}
+  m_Offset: {x: -1.478993, y: -2.3136835}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -131,7 +132,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.7908723, y: 50.53608}
+  m_Size: {x: 3.614476, y: 6.395213}
   m_EdgeRadius: 0
 --- !u!50 &452758687704190354
 Rigidbody2D:
@@ -173,7 +174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 8683968501033214702}
-  disableTime: 3
+  disableTime: 1.5
 --- !u!114 &6005078556746735351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,3 +189,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSource: {fileID: 0}
   objectPool: {fileID: 2795618491023108701}
+--- !u!210 &8766205787935765181
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8683968501033214702}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: -10
+  m_SortAtRoot: 0

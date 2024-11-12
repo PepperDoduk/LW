@@ -27,7 +27,7 @@ public class Rpg_Bomb : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            AudioManager.instance.PlaySfx(AudioManager.Sfx.TankHit);
+            Audiomanager_prototype.instance.PlaySfx(Audiomanager_prototype.Sfx.TankHit);
             Destroy(gameObject);
         }
     }

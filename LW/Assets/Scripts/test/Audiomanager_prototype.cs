@@ -35,7 +35,7 @@ public class Audiomanager_prototype : MonoBehaviour
         Titan35mm,
         TitanMissle,
         PKM,
-        BULLET
+        striker_explosion,
     }
 
     void Awake()
@@ -108,33 +108,43 @@ public class Audiomanager_prototype : MonoBehaviour
 
     public void PlaySfx(Sfx sfx)
     {
+        bool isPlayed = false;
+
         for (int index = 0; index < sfxPlayers.Length; index++)
         {
             if (!sfxPlayers[index].isPlaying)
             {
                 sfxPlayers[index].clip = sfxClips[(int)sfx];
 
-                // sfxVolumes 배열에서 해당 효과음의 볼륨을 가져와서 설정
                 float volume = Mathf.Clamp(sfxVolumes[(int)sfx], 0f, 200f);
-                sfxPlayers[index].volume = volume / 100f;  // 0~200 값을 0~1로 변환
+                sfxPlayers[index].volume = volume / 100f;
 
                 sfxPlayers[index].Play();
+                isPlayed = true;
                 break;
             }
         }
+
+        if (!isPlayed)
+        {
+            channelIndex = (channelIndex + 1) % sfxPlayers.Length;
+            sfxPlayers[channelIndex].clip = sfxClips[(int)sfx];
+
+            float volume = Mathf.Clamp(sfxVolumes[(int)sfx], 0f, 200f);
+            sfxPlayers[channelIndex].volume = volume / 100f;
+
+            sfxPlayers[channelIndex].Play();
+        }
     }
 
-    // BGM 볼륨을 0 ~ 200 범위로 조정하고 Audio Mixer를 통해 증폭
     public void SetBgmVolume(float volume)
     {
         bgmVolume = Mathf.Clamp(volume, 0f, 200f);
 
-        // Audio Mixer에 0 ~ 200 범위의 값을 dB로 변환 (0 dB 이상은 소리 증폭)
-        float mixerVolume = Mathf.Log10(bgmVolume / 100f) * 20f;  // dB로 변환
+        float mixerVolume = Mathf.Log10(bgmVolume / 100f) * 20f; 
         audioMixer.SetFloat(bgmMixerGroupName, mixerVolume);
     }
 
-    // 효과음마다 볼륨 설정 가능
     public void SetSfxVolume(Sfx sfx, float volume)
     {
         sfxVolumes[(int)sfx] = Mathf.Clamp(volume, 0f, 200f);

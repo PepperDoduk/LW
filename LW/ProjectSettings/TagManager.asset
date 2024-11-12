@@ -15,6 +15,7 @@ TagManager:
   - E762
   - 210mm
   - 35mm
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -51,4 +52,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Large Unit
+    uniqueID: 2559443737
+    locked: 0
+  - name: Midium unit
+    uniqueID: 481949939
     locked: 0

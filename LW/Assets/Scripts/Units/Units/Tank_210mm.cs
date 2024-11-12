@@ -5,6 +5,8 @@ public class Tank_210mm : MonoBehaviour
     public AudioSource audioSource;
     public ObjectPool objectPool;
 
+    [SerializeField] private GameObject explosionPrefab;
+
     public float speed;
 
     void Start()
@@ -24,10 +26,12 @@ public class Tank_210mm : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
+            
             Audiomanager_prototype.instance.PlaySfx(Audiomanager_prototype.Sfx.TankHit);
-            //Destroy(gameObject);
-            objectPool.ReturnToPoolAfterDelay(0);
-            objectPool.Deactivate();
+
+            StartCoroutine(objectPool.ReturnToPoolAfterDelay(0));
+            GameObject explosion = ObjectPoolManager.Instance.GetObjectFromPool(explosionPrefab, Quaternion.identity, new Vector3(1f, 1f, 1));
+            explosion.transform.position = transform.position; //new Vector3(transform.position.x - 1, transform.position.y, 0);
         }
     }
 }

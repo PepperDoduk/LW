@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6153229259234409839}
   - component: {fileID: 452758687704190354}
   - component: {fileID: 799709232897558299}
+  - component: {fileID: -2311428927455500251}
   m_Layer: 0
   m_Name: 7.62mm
   m_TagString: 7.62mm
@@ -172,3 +173,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 0}
+--- !u!210 &-2311428927455500251
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8683968501033214702}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: -10
+  m_SortAtRoot: 0

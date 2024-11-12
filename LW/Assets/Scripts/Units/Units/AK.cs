@@ -22,7 +22,7 @@ public class AK : MonoBehaviour
         anim = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         HP = 150;
-        moveSpeed = 0.7f;
+        moveSpeed = 1.3f;
         AttackCoolTime = 1.1f;
         intersection = 5f;
         anim.SetInteger("AK_anim", (int)1);

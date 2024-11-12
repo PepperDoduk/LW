@@ -33,6 +33,7 @@ public class M1: MonoBehaviour
         if (HP < 0.01)
         {
             Audiomanager_prototype.instance.PlaySfx(Audiomanager_prototype.Sfx.TankDestroy);
+            gameObject.SetActive(false);
             Destroy(gameObject,0.3f);
         }
 
@@ -119,7 +120,7 @@ public class M1: MonoBehaviour
         if (other.gameObject.CompareTag("7.62mm"))
         {
             MinusHealthPoint(-10);
-            Audiomanager_prototype.instance.PlaySfx(Audiomanager_prototype.Sfx.BULLET);
+            //Audiomanager_prototype.instance.PlaySfx(Audiomanager_prototype.Sfx.TankHit);
         }
     }
 }

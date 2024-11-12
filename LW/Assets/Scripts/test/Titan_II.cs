@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Drawing;
+using static ObjectPoolManager;
 
 public class Titan_II : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class Titan_II : MonoBehaviour
     public int animNum = 0;
 
     public int ammo35mm = 1;
+    public int ammoStriker = 1;
 
     public Animator anim;
     public AudioSource audioSource;
@@ -38,9 +40,12 @@ public class Titan_II : MonoBehaviour
 
     public GameObject bombPrefab;
     public GameObject bulletPrefab;
+    public GameObject missilePrefab;
 
     [SerializeField] private GameObject titanMuzzleFlashPrefab;
     [SerializeField] private GameObject MuzzleFlashPrefab;
+
+    public ObjectPool pool;
 
     public int ammo = 1;
 
@@ -58,7 +63,7 @@ public class Titan_II : MonoBehaviour
         if (HP < 0)
         {
             Audiomanager_prototype.instance.PlaySfx(Audiomanager_prototype.Sfx.TankDestroy);
-            Destroy(gameObject, 0.3f);
+            StartCoroutine(pool.ReturnToPoolAfterDelay(0.3f));
         }
 
         GameObject[] targets = GameObject.FindGameObjectsWithTag(targetTag);
@@ -78,6 +83,7 @@ public class Titan_II : MonoBehaviour
         if (distance <= intersection)
         {
             StartCoroutine(Fire35mm());
+            StartCoroutine(FireStriker());
             if (!isAttacking && ammo > 0)
             {
                 StartCoroutine(FireAndWait());
@@ -128,7 +134,6 @@ public class Titan_II : MonoBehaviour
         {
             ammo--;
             audioSource.Play();
-            //Instantiate(bomb, new Vector3(transform.position.x, transform.position.y + 7f, 0), Quaternion.identity);
 
             for (int i = 0; i < 2; ++i)
             {
@@ -139,14 +144,13 @@ public class Titan_II : MonoBehaviour
                 yield return new WaitForSeconds(0.5f);
             }
 
-            //Instantiate(bomb, new Vector3(transform.position.x, transform.position.y + 7f, 0), Quaternion.identity);
-            /*GameObject bomb2 = ObjectPoolManager.Instance.GetObjectFromPool(bombPrefab, Quaternion.identity, sizeOfBomb);
-            GameObject muzzleflash2 = ObjectPoolManager.Instance.GetObjectFromPool(titanMuzzleFlashPrefab, Quaternion.identity, sizeOfMuzzleFlash);
-            bomb2.transform.position = transform.position + locationOfBomb;
-            muzzleflash2.transform.position = transform.position + locationOfMuzzleFlash;*/
         }
     }
 
+    public Vector3 ReturnCurrentPos()
+    {
+        return transform.position;
+    }
 
     public void Reload()
     {
@@ -162,7 +166,6 @@ public class Titan_II : MonoBehaviour
 
             for (int i = 0; i < 20; i++)
             {
-                //Instantiate(bullet, new Vector3(transform.position.x, transform.position.y + 5.6f, 0), Quaternion.Euler(0, 0, Random.Range(-0.3f, 0.3f)));
                 GameObject b35mm = ObjectPoolManager.Instance.GetObjectFromPool(bulletPrefab, Quaternion.identity, sizeOfBullet35);
                 GameObject bmuzzleflash = ObjectPoolManager.Instance.GetObjectFromPool(MuzzleFlashPrefab, Quaternion.identity, sizeOfMuzzleFlash35);
                 b35mm.transform.position = transform.position + locationOfBullet35;
@@ -173,6 +176,26 @@ public class Titan_II : MonoBehaviour
             yield return new WaitForSeconds(6f);
 
             ammo35mm = 1;
+        }
+    }
+
+    public IEnumerator FireStriker()
+    {
+        if (ammoStriker > 0)
+        {
+            ammoStriker = 0;
+
+            for (int i = 0; i < 8; i++)
+            {
+                Audiomanager_prototype.instance.PlaySfx(Audiomanager_prototype.Sfx.TitanMissle);
+                GameObject Striker = ObjectPoolManager.Instance.GetObjectFromPool(missilePrefab, Quaternion.identity, sizeOfMissle);
+                Striker.transform.position = transform.position + locationOfMissle;
+                yield return new WaitForSeconds(0.4f);
+            }
+
+            yield return new WaitForSeconds(15f);
+
+            ammoStriker = 1;
         }
     }
 

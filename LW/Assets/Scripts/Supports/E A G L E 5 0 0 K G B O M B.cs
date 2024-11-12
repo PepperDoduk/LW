@@ -6,13 +6,12 @@ public class EAGLE500KGBOMB : MonoBehaviour
 {
     public Sprite[] ImgAsset;
     private Image NowImage;
-    public AudioManager audio;
 
     public void EAGLEStart()
     {
         gameObject.SetActive(true);
         NowImage = GetComponent<Image>();
-        audio.PlayBgm(false);
+        //audio.PlayBgm(false);
         StartCoroutine(StartCountDown());
     }
 
@@ -45,7 +44,7 @@ public class EAGLE500KGBOMB : MonoBehaviour
         yield return new WaitForSeconds(0.45f);
         NowImage.sprite = ImgAsset[6];
         yield return new WaitForSeconds(28f);
-        audio.PlayBgm(true);
+        //audio.PlayBgm(true);
         gameObject.SetActive(false);
     }
 }

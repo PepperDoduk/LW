@@ -10,7 +10,7 @@ public class T90_test : MonoBehaviour
     public string targetTag = "Enemy";
     public float moveSpeed = 2f;
     public float distance;
-    public float intersection = 0f;
+    public float intersection;
 
     public Animator anim;
     public AudioSource audioSource;
@@ -19,6 +19,8 @@ public class T90_test : MonoBehaviour
     public float AttackCoolTime;
 
     private bool isAttacking = false;
+
+    public ObjectPool pool; 
 
     public GameObject bomb;
     void Start()
@@ -31,20 +33,23 @@ public class T90_test : MonoBehaviour
     void Update()
     {
 
+        if (intersection < distance && distance>25)
+        {
+            moveSpeed = 3;
+        }
+        else
+        {
+            moveSpeed = 2;
+        }
+
         if (HP < 0)
         {
             //AudioManager.instance.PlaySfx(AudioManager.Sfx.TankDestroy);
             Audiomanager_prototype.instance.PlaySfx(Audiomanager_prototype.Sfx.TankDestroy);
             //Destroy(gameObject, 0.3f);
-            StartCoroutine(ReturnToPoolAfterDelay(0.3f));
+            StartCoroutine(pool.ReturnToPoolAfterDelay(0.3f));
         }
 
-
-        IEnumerator ReturnToPoolAfterDelay(float delay)
-        {
-            yield return new WaitForSeconds(delay);
-            GetComponent<ObjectPool>().Deactivate();
-        }
 
 
         GameObject[] targets = GameObject.FindGameObjectsWithTag(targetTag);

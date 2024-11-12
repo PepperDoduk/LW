@@ -24,9 +24,9 @@ public class T14 : MonoBehaviour
         anim = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         HP = 5000;
-        moveSpeed = 0.7f;
+        moveSpeed = 2f;
         AttackCoolTime = 6f;
-        intersection = 12f;
+        intersection = 17f;
         anim.SetInteger("T14_anim", (int)1);
     }
 

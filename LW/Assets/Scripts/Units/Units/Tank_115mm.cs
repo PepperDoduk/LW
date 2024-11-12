@@ -5,6 +5,8 @@ public class Tank_115mm : MonoBehaviour
     public AudioSource audioSource;
     public ObjectPool objectPool;
 
+    [SerializeField] private GameObject explosionPrefab;
+
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -22,9 +24,10 @@ public class Tank_115mm : MonoBehaviour
         if (other.gameObject.CompareTag("Enemy"))
         {
             Audiomanager_prototype.instance.PlaySfx(Audiomanager_prototype.Sfx.TankHit);
-            //Destroy(gameObject);
-            objectPool.ReturnToPoolAfterDelay(0);
-            objectPool.Deactivate();
+            GameObject explosion = ObjectPoolManager.Instance.GetObjectFromPool(explosionPrefab, Quaternion.identity, new Vector3(0.7f, 0.7f, 1));
+            explosion.transform.position = transform.position; //new Vector3(transform.position.x - 1, transform.position.y, 0);
+
+            StartCoroutine(objectPool.ReturnToPoolAfterDelay(0));
         }
     }
 }
