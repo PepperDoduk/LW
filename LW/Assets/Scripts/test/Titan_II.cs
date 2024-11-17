@@ -49,8 +49,11 @@ public class Titan_II : MonoBehaviour
 
     public int ammo = 1;
 
+    private bool isDied;
+
     void Start()
     {
+        isDied = false;
         anim = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         animNum = 1;
@@ -62,9 +65,13 @@ public class Titan_II : MonoBehaviour
     {
         if (HP < 0)
         {
+            isDied = true;
+            if (isDied) 
             Audiomanager_prototype.instance.PlaySfx(Audiomanager_prototype.Sfx.TankDestroy);
-            StartCoroutine(pool.ReturnToPoolAfterDelay(0.3f));
+            StartCoroutine(pool.ReturnToPoolAfterDelay(0f));
+            isDied = false;
         }
+        
 
         GameObject[] targets = GameObject.FindGameObjectsWithTag(targetTag);
         float closestDistance = Mathf.Infinity;
@@ -83,7 +90,10 @@ public class Titan_II : MonoBehaviour
         if (distance <= intersection)
         {
             StartCoroutine(Fire35mm());
-            StartCoroutine(FireStriker());
+            if (distance > 15)
+            {
+                StartCoroutine(FireStriker());
+            }
             if (!isAttacking && ammo > 0)
             {
                 StartCoroutine(FireAndWait());
