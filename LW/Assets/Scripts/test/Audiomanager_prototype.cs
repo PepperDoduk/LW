@@ -36,6 +36,7 @@ public class Audiomanager_prototype : MonoBehaviour
         TitanMissle,
         PKM,
         striker_explosion,
+        Kord,
     }
 
     void Awake()
@@ -67,14 +68,17 @@ public class Audiomanager_prototype : MonoBehaviour
             sfxPlayers[index].playOnAwake = false;
         }
 
-        // 효과음 볼륨 배열 초기화 (효과음 개수와 동일해야 함)
         if (sfxVolumes == null || sfxVolumes.Length != sfxClips.Length)
         {
             sfxVolumes = new float[sfxClips.Length];
             for (int i = 0; i < sfxVolumes.Length; i++)
             {
-                sfxVolumes[i] = 100f;  // 기본적으로 모든 효과음을 100%로 설정
+                sfxVolumes[i] = 100f; 
             }
+            sfxVolumes[9] = 20;
+            sfxVolumes[8] = 70;
+            sfxVolumes[7] = 50;
+            sfxVolumes[10] = 60;
         }
 
         SetBgmVolume(bgmVolume);

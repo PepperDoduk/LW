@@ -117,6 +117,10 @@ public class M1: MonoBehaviour
         {
             MinusHealthPoint(-250);
         }
+        if (other.gameObject.CompareTag("12mm"))
+        {
+            MinusHealthPoint(-30);
+        }
         if (other.gameObject.CompareTag("7.62mm"))
         {
             MinusHealthPoint(-10);

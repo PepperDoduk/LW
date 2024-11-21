@@ -119,6 +119,10 @@ public class M16: MonoBehaviour
         {
             MinusHealthPoint(-40);
         }
+        if (other.gameObject.CompareTag("12mm"))
+        {
+            MinusHealthPoint(-75);
+        }
         if (other.gameObject.CompareTag("35mm"))
         {
             MinusHealthPoint(-105);

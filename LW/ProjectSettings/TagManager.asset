@@ -16,6 +16,8 @@ TagManager:
   - 210mm
   - 35mm
   - Ground
+  - 12mm
+  - Airbase
   layers:
   - Default
   - TransparentFX
