@@ -1,43 +1,48 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class su57 : MonoBehaviour
 {
     public Animator anim;
-    public string targetTag = "Enemy";
-    public string LandTag = "Airbase";
 
+    [Header("Tags")]
+    public string targetTag = "Enemy";
+    public string landTag = "Airbase";
+
+    [Header("Flight State")]
     public bool isFlying;
-    public bool isBording;
+    public bool isTakingOff;
     public bool isLanding;
     public bool isLanded;
+    public bool isAttacking;
+    public bool stop;
 
-    public float bomb;
-    public float missile;
-    public float ammo;
-    public float flare;
+    [Header("Ammunition")]
+    public float bomb = 5;
+    public float missile = 6;
+    public float ammo = 100;
+    public float flare = 3;
 
-    public float moveSpeed;
+    [Header("Movement")]
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float duration = 2f;
+    [SerializeField] private Quaternion startRotation;
+    [SerializeField] private Quaternion targetRotation;
+    private float timeElapsed = 0f;
 
+    [Header("Prefabs")]
     [SerializeField] private GameObject missilePrefab;
     [SerializeField] private GameObject bombPrefab;
     [SerializeField] private GameObject bulletPrefab;
 
+    [Header("Distance Tracking")]
     public float distance;
     public float distanceToBase;
-    public float intersection;
-
-    public Vector3 targetEulerAngles;
-
-    public float duration = .0f;
-
-    public Quaternion startRotation;
-    public Quaternion targetRotation;
-    private float timeElapsed = 0f;
+    private float intersection = 70;
 
     public int animNum;
+
+    public int speedNum = 1;
 
     public static class AN
     {
@@ -49,7 +54,7 @@ public class su57 : MonoBehaviour
     }
     void Start()
     {
-        Bording();
+        StartCoroutine("TakingOff");
         startRotation = transform.rotation;
         bomb = 5;
         missile = 6;
@@ -59,43 +64,70 @@ public class su57 : MonoBehaviour
         intersection = 70;
         animNum = AN.Landed;
 
+        isLanded = false;
+        isAttacking = false;
+        stop = false;
     }
 
     void Update()
     {
-        // 비행 중일 때와 착륙 중일 때의 이동 속도 설정
+
+        if (Quaternion.Angle(transform.rotation, targetRotation) < 0.3f)
+        {
+            startRotation = transform.rotation;
+            timeElapsed = 0f;
+        }
+
+        if (transform.transform.position.z !=0)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+       }
+
+        if (transform.position.x > 200)
+        {
+            StartCoroutine("TurnToLeft");
+        }
+
+        if (transform.position.x < -260)
+        {
+            StartCoroutine("TurnToRight");
+        }
+
+        if (distance < 40 && isFlying && transform.position.y > 15)
+        {
+            StartCoroutine("Attack");
+        }
+
+        timeElapsed += Time.deltaTime;
+        transform.rotation = Quaternion.Slerp(startRotation, targetRotation, timeElapsed / duration);
+
+        if (transform.rotation != targetRotation)
+        {
+            startRotation = transform.rotation;
+            timeElapsed = 0f;
+        }
+
         if ((bomb == 0 && missile < 2) || (ammo < 20 && missile < 2) || ammo < 20)
         {
             Landing();
         }
 
-        if (isFlying && !isLanded)
+        if (isFlying && !isLanded && !stop)
         {
-            moveSpeed = 20;
+            moveSpeed = 45;
+
+            animNum = AN.Idle;
         }
-        else if (!isFlying && isLanded && !isBording)
+        else if (!isFlying && isLanded && !isTakingOff)
         {
             moveSpeed = 0;
         }
 
-        if (transform.rotation != targetRotation)
-        {
-            // 새로운 목표 각도로 회전하기 위해 startRotation을 현재 회전값으로 갱신
-            startRotation = transform.rotation;
-            timeElapsed = 0f;  // 시간 초기화
-        }
-
-        // 목표 각도로 서서히 회전
-        timeElapsed += Time.deltaTime;
-        transform.rotation = Quaternion.Slerp(startRotation, targetRotation, timeElapsed / duration);
-
-        // 애니메이션 설정
         anim.SetInteger("su57", animNum);
 
-        // 비행체 이동: 현재 회전 방향으로 이동
-        Vector3 moveDirection = transform.right;  // 오른쪽 방향으로 이동
+        Vector3 moveDirection = transform.right;
         transform.position += moveDirection * moveSpeed * Time.deltaTime;
-        // 가장 가까운 적 탐색
+
         GameObject[] targets = GameObject.FindGameObjectsWithTag(targetTag);
         float closestDistance = Mathf.Infinity;
         foreach (GameObject target in targets)
@@ -108,8 +140,7 @@ public class su57 : MonoBehaviour
         }
         distance = closestDistance;
 
-        // 가장 가까운 기지 탐색
-        GameObject[] bases = GameObject.FindGameObjectsWithTag(LandTag);
+        GameObject[] bases = GameObject.FindGameObjectsWithTag("Airbase");
         float closestDistanceToBase = Mathf.Infinity;
         foreach (GameObject baseObj in bases)
         {
@@ -126,27 +157,44 @@ public class su57 : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
 
-        if (other.gameObject.CompareTag("Airbase"))
+        if (other.gameObject.CompareTag(landTag))
         {
             isFlying = false;
             StartCoroutine("Landed");
         }
     }
 
+    public IEnumerator Attack()
+    {
+        stop = true;
+        isAttacking = true;
+        targetRotation = Quaternion.Euler(0f, transform.rotation.y, -25f);
+        moveSpeed = 40;
+        yield return new WaitForSeconds(1f);
+        targetRotation = Quaternion.Euler(0f, transform.rotation.y, 50f);
+        moveSpeed = 70;
+        yield return new WaitForSeconds(0.6f);
+        targetRotation = Quaternion.Euler(0f, transform.rotation.y, 0f);
+        moveSpeed = 35;
+
+        isAttacking = false;
+        stop = false;
+    }
+
     public IEnumerator Landing()
     {
-        targetRotation = Quaternion.Euler(0f, 0f, -45f);
+        targetRotation = Quaternion.Euler(0f, transform.rotation.y, -45f);
         isLanding = true;
         yield return new WaitForSeconds(1f);
         animNum = AN.Landing;
         yield return new WaitForSeconds(1f);
-        Landed();
+        StartCoroutine("Landed");
     }
 
     public IEnumerator Landed()
     {
         animNum = AN.Landed;
-        targetRotation = Quaternion.Euler(0f, 0f, 0f);
+        targetRotation = Quaternion.Euler(0f, transform.rotation.y, 0f);
         isFlying = false;
         yield return new WaitForSeconds(4);
         missile = 4;
@@ -154,35 +202,58 @@ public class su57 : MonoBehaviour
         bomb = 6;
         flare = 3;
         yield return new WaitForSeconds(1);
-        Bording();
-        
+        StartCoroutine("TakingOff");
+
     }
 
-    public IEnumerator Bording()
+    public IEnumerator TakingOff()
     {
-        isBording = true;
-        moveSpeed = 5;
+        isTakingOff = true;
+        moveSpeed = 7;
 
         startRotation = transform.rotation;
 
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
+        moveSpeed = 15;
+        yield return new WaitForSeconds(0.6f);
+        targetRotation = Quaternion.Euler(0f, transform.rotation.y, 20f);
+        moveSpeed = 22;
+        yield return new WaitForSeconds(0.3f);
 
-        targetRotation = Quaternion.Euler(0f, 0f, 45f);
-        moveSpeed = 11;
+        targetRotation = Quaternion.Euler(0f, transform.rotation.y, 45f);
+        moveSpeed = 20;
 
         yield return new WaitForSeconds(0.4f);
         animNum = AN.Bording;
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.7f);
 
-        moveSpeed = 17;
-        isBording = false;
+        moveSpeed = 25;
+        isTakingOff = false;
         isFlying = true;
 
-        startRotation = transform.rotation; 
-        targetRotation = Quaternion.Euler(0f, 0f, 0f);
+        yield return new WaitForSeconds(0.3f);
+        startRotation = transform.rotation;
+        targetRotation = Quaternion.Euler(0f, transform.rotation.y, 0f);
+        animNum = AN.Idle;
     }
 
+    public IEnumerator TurnToLeft()
+    {
+        speedNum = -1;
+        targetRotation = Quaternion.Euler(0f, -180f, 0);
+        moveSpeed = -60;
+        yield return new WaitForSeconds(0f);
+
+    }
+    public IEnumerator TurnToRight()
+    {
+        speedNum = 1;
+        targetRotation = Quaternion.Euler(0f, 0f, 0f);
+        moveSpeed = 60;
+        yield return new WaitForSeconds(0f);
+
+    }
 
 }

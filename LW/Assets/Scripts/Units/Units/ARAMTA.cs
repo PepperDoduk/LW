@@ -7,7 +7,7 @@ public class ARAMTA : MonoBehaviour
 {
     public string targetTag = "Enemy";
     public float moveSpeed = 0f;
-    public float distance;
+    public float distance = 50;
     public float intersection = 0f;
 
     public Vector3 sizeOfBomb;

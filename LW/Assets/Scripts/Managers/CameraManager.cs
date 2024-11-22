@@ -65,7 +65,7 @@ public class CameraManager : MonoBehaviour
 
         if (distance != 0)
         {
-            mainCamera.orthographicSize = Mathf.Clamp(mainCamera.orthographicSize + distance, 2.0f, 10.0f);
+            mainCamera.orthographicSize = Mathf.Clamp(mainCamera.orthographicSize + distance, 1.3f, 30.0f);
         }
     }
 }
