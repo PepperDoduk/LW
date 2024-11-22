@@ -93,9 +93,9 @@ public class su57 : MonoBehaviour
             StartCoroutine("TurnToRight");
         }
 
-        if (distance < 40 && isFlying && transform.position.y > 15)
+        if (distance < 65 && isFlying && transform.position.y > 15)
         {
-            StartCoroutine("Attack");
+           // StartCoroutine("Attack");
         }
 
         timeElapsed += Time.deltaTime;
@@ -128,6 +128,16 @@ public class su57 : MonoBehaviour
         Vector3 moveDirection = transform.right;
         transform.position += moveDirection * moveSpeed * Time.deltaTime;
 
+        if (Time.frameCount % 5 == 0)
+        {
+            LocateTarget();
+            LocateBase();
+        }
+
+    }
+
+    public void LocateTarget()
+    {
         GameObject[] targets = GameObject.FindGameObjectsWithTag(targetTag);
         float closestDistance = Mathf.Infinity;
         foreach (GameObject target in targets)
@@ -139,7 +149,10 @@ public class su57 : MonoBehaviour
             }
         }
         distance = closestDistance;
+    } 
 
+    public void LocateBase()
+    {
         GameObject[] bases = GameObject.FindGameObjectsWithTag("Airbase");
         float closestDistanceToBase = Mathf.Infinity;
         foreach (GameObject baseObj in bases)
@@ -166,29 +179,51 @@ public class su57 : MonoBehaviour
 
     public IEnumerator Attack()
     {
-        stop = true;
-        isAttacking = true;
-        targetRotation = Quaternion.Euler(0f, transform.rotation.y, -25f);
-        moveSpeed = 40;
-        yield return new WaitForSeconds(1f);
-        targetRotation = Quaternion.Euler(0f, transform.rotation.y, 50f);
-        moveSpeed = 70;
-        yield return new WaitForSeconds(0.6f);
-        targetRotation = Quaternion.Euler(0f, transform.rotation.y, 0f);
-        moveSpeed = 35;
+        if(speedNum == 1){
+            stop = true;
+            isAttacking = true;
+            targetRotation = Quaternion.Euler(0, 0, -25f);
+            moveSpeed = 40;
+            yield return new WaitForSeconds(1f);
+            targetRotation = Quaternion.Euler(0, 0, 50f);
+            moveSpeed = 70;
+            yield return new WaitForSeconds(0.6f);
+            targetRotation = Quaternion.Euler(0, 0, 0f);
+            moveSpeed = 35;
 
-        isAttacking = false;
-        stop = false;
+            isAttacking = false;
+            stop = false;
+        }
+
+        if (speedNum == -1)
+        {
+            stop = true;
+            isAttacking = true;
+            targetRotation = Quaternion.Euler(0, -180, -25f);
+            moveSpeed = 40;
+            yield return new WaitForSeconds(1f);
+            targetRotation = Quaternion.Euler(0, -180, 50f);
+            moveSpeed = 70;
+            yield return new WaitForSeconds(0.6f);
+            targetRotation = Quaternion.Euler(0, -180, 0f);
+            moveSpeed = 35;
+
+            isAttacking = false;
+            stop = false;
+        }
+
     }
 
     public IEnumerator Landing()
     {
+        if(speedNum == 1) { 
         targetRotation = Quaternion.Euler(0f, transform.rotation.y, -45f);
         isLanding = true;
         yield return new WaitForSeconds(1f);
         animNum = AN.Landing;
         yield return new WaitForSeconds(1f);
         StartCoroutine("Landed");
+            }
     }
 
     public IEnumerator Landed()

@@ -71,7 +71,6 @@ public class ARAMTA : MonoBehaviour
     {
         anim.SetInteger("ARMATA", animNum);
 
-        // HP가 0 이하이면 처리
         if (HP < 0)
         {
             isDied = true;
@@ -81,13 +80,11 @@ public class ARAMTA : MonoBehaviour
             isDied = false;
         }
 
-        // 타겟을 15프레임마다 한 번만 찾도록 설정
         if (Time.frameCount % 15 == 0)
         {
             FindClosestTarget();
         }
 
-        // 타겟과의 거리가 일정 범위 이하라면 공격 준비
         if (distance <= intersection)
         {
             animNum = AN.Idle;
