@@ -9739,6 +9739,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: 707f0647d4724df4cbf75805ac8bb27c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 432464671123877883}
+    - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: 707f0647d4724df4cbf75805ac8bb27c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4877515019603274472}
   m_SourcePrefab: {fileID: 4843985084834002234, guid: 707f0647d4724df4cbf75805ac8bb27c, type: 3}
 --- !u!1 &7437348376721703878 stripped
 GameObject:
@@ -9761,11 +9764,12 @@ MonoBehaviour:
   targetTag: Enemy
   landTag: Airbase
   isFlying: 0
-  isTakingOff: 1
+  isTakingOff: 0
   isLanding: 0
   isLanded: 0
   isAttacking: 0
   stop: 0
+  isAttack: 0
   bomb: 0
   missile: 0
   ammo: 0
@@ -9775,8 +9779,10 @@ MonoBehaviour:
   startRotation: {x: 0, y: 0, z: 0, w: 0}
   targetRotation: {x: 0, y: 0, z: 0, w: 0}
   missilePrefab: {fileID: 0}
-  bombPrefab: {fileID: 0}
+  bombPrefab: {fileID: 4255276646883562535, guid: a35fe00e01107934ea523bafa5ae67a1, type: 3}
   bulletPrefab: {fileID: 0}
+  sizeOfBomb: {x: 0.25, y: 0.25, z: 0.25}
+  locationOfBomb: {x: 0, y: 0, z: 0}
   distance: 0
   distanceToBase: 0
   animNum: 0
@@ -9814,6 +9820,102 @@ SortingGroup:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_SortAtRoot: 0
+--- !u!82 &4877515019603274472
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7437348376721703878}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 256ff062792691c48a83cc3c688392fc, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.441
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!4 &8646591487558556581 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -7552582706839291426, guid: 707f0647d4724df4cbf75805ac8bb27c, type: 3}

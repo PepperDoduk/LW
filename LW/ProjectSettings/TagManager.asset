@@ -18,6 +18,8 @@ TagManager:
   - Ground
   - 12mm
   - Airbase
+  - Kh38
+  - 152mmHE
   layers:
   - Default
   - TransparentFX

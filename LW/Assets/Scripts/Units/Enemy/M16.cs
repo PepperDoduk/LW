@@ -22,7 +22,6 @@ public class M16: MonoBehaviour
         anim = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         HP = 250;
-        moveSpeed = 1f;
         AttackCoolTime = 2f;
         intersection = 6f;
         anim.SetInteger("M16_anim", (int)1);
@@ -126,6 +125,14 @@ public class M16: MonoBehaviour
         if (other.gameObject.CompareTag("35mm"))
         {
             MinusHealthPoint(-105);
+        }
+        if (other.gameObject.CompareTag("152mmHE"))
+        {
+            MinusHealthPoint(-5500);
+        }
+        if (other.gameObject.CompareTag("Kh38"))
+        {
+            MinusHealthPoint(-3000);
         }
     }
     IEnumerator Shoot()

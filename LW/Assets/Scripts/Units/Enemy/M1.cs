@@ -22,9 +22,8 @@ public class M1: MonoBehaviour
         anim = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         HP = 6000;
-        moveSpeed = 0.7f;
-        AttackCoolTime = 7f;
-        intersection = 14f;
+        AttackCoolTime = 8f;
+        intersection = 25f;
         anim.SetInteger("M1_anim", (int)1);
     }
 
@@ -94,19 +93,23 @@ public class M1: MonoBehaviour
     {
         if (other.gameObject.CompareTag("125mm"))
         {
-            MinusHealthPoint(-500);
+            MinusHealthPoint(-750);
         }
         if (other.gameObject.CompareTag("115mm"))
         {
-            MinusHealthPoint(-350);
+            MinusHealthPoint(-550);
         }
         if (other.gameObject.CompareTag("210mm"))
         {
-            MinusHealthPoint(-1000);
+            MinusHealthPoint(-1050);
         }
         if (other.gameObject.CompareTag("35mm"))
         {
             MinusHealthPoint(-55);
+        }
+        if (other.gameObject.CompareTag("Kh38"))
+        {
+            MinusHealthPoint(-6500);
         }
 
         if (other.gameObject.CompareTag("500KG"))
@@ -121,10 +124,13 @@ public class M1: MonoBehaviour
         {
             MinusHealthPoint(-30);
         }
+        if (other.gameObject.CompareTag("152mmHE"))
+        {
+            MinusHealthPoint(-4500);
+        }
         if (other.gameObject.CompareTag("7.62mm"))
         {
             MinusHealthPoint(-10);
-            //Audiomanager_prototype.instance.PlaySfx(Audiomanager_prototype.Sfx.TankHit);
         }
     }
 }

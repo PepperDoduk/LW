@@ -13,7 +13,7 @@ public class Enemy_production : MonoBehaviour
 
     void Start()
     {
-        InvokeRepeating("Enemy", 1f, Random.Range(5f, 15f));
+        InvokeRepeating("Enemy", 1f, Random.Range(1f, 7f));
     }
 
     void Enemy()

@@ -2060,7 +2060,7 @@ MonoBehaviour:
   locationOfBullet35: {x: 3, y: 3, z: 0}
   sizeOfMuzzleFlash35: {x: 1, y: 1, z: 1}
   locationOfMuzzleFlash35: {x: 3.7, y: 3.72, z: 0}
-  sizeOfMissle: {x: 0.1, y: 0.1, z: 1}
+  sizeOfMissle: {x: 0.13, y: 0.13, z: 1}
   locationOfMissle: {x: -4, y: 5.5, z: 0}
   animNum: 0
   ammo35mm: 1

@@ -5,34 +5,36 @@ using static ObjectPoolManager;
 
 public class Titan_II : MonoBehaviour
 {
+    [Header("Tag")]
     public string targetTag = "Enemy";
+
+    [Header("Move and Distance")]
     public float moveSpeed = 0f;
     public float distance;
     public float intersection = 0f;
 
+    [Header("Size and Location")]
     public Vector3 sizeOfBomb;
     public Vector3 locationOfBomb;
-
     public Vector3 sizeOfMuzzleFlash;
     public Vector3 locationOfMuzzleFlash;
-
     public Vector3 sizeOfBullet35;
     public Vector3 locationOfBullet35;
-
     public Vector3 sizeOfMuzzleFlash35;
     public Vector3 locationOfMuzzleFlash35;
-
     public Vector3 sizeOfMissle;
     public Vector3 locationOfMissle;
 
+    [Header("Values")]
     public int animNum = 0;
-
     public int ammo35mm = 1;
     public int ammoStriker = 1;
 
+    [Header("Componunt")]
     public Animator anim;
     public AudioSource audioSource;
 
+    [Header("Componunt")]
     public float HP;
     public float AttackCoolTime;
 
