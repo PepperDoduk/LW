@@ -7,19 +7,19 @@ public class Audiomanager_prototype : MonoBehaviour
 
     [Header("BGM")]
     public AudioClip[] bgmClips;
-    public float bgmVolume;  // 0 ~ 200 범위
+    public float bgmVolume; 
     AudioSource bgmPlayer;
     int currentBgmIndex;
 
     [Header("SFX")]
     public AudioClip[] sfxClips;
-    public float[] sfxVolumes;  // 효과음마다 개별 볼륨 저장
+    public float[] sfxVolumes;  
     public int channels;
     AudioSource[] sfxPlayers;
     int channelIndex;
 
     [Header("Audio Mixer")]
-    public AudioMixer audioMixer;  // Audio Mixer 연결
+    public AudioMixer audioMixer;  
     public string bgmMixerGroupName = "BGMVolume";
     public string sfxMixerGroupName = "SFXVolume";
 
@@ -37,6 +37,10 @@ public class Audiomanager_prototype : MonoBehaviour
         PKM,
         striker_explosion,
         Kord,
+        Gun30mm,
+        explosion30mm,
+        MouseEnter,
+        MouseClick,
     }
 
     void Awake()
@@ -79,6 +83,10 @@ public class Audiomanager_prototype : MonoBehaviour
             sfxVolumes[8] = 70;
             sfxVolumes[7] = 50;
             sfxVolumes[10] = 60;
+            sfxVolumes[11] = 60;
+            sfxVolumes[12] = 60;
+            sfxVolumes[15] = 80;
+            sfxVolumes[16] = 200;
         }
 
         SetBgmVolume(bgmVolume);

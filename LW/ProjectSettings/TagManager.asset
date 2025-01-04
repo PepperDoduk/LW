@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
+  serializedVersion: 3
   tags:
   - Enemy
   - Unit
@@ -20,6 +20,8 @@ TagManager:
   - Airbase
   - Kh38
   - 152mmHE
+  - 30mmHE
+  - striker
   layers:
   - Default
   - TransparentFX
@@ -63,3 +65,5 @@ TagManager:
   - name: Midium unit
     uniqueID: 481949939
     locked: 0
+  m_RenderingLayers:
+  - Default

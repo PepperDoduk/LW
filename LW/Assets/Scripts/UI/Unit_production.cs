@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class Unit_production : MonoBehaviour
 {
     public Button productionButton;
-    public Vector3 location;
-    public Vector3 size;
+    public Vector3 unitLocation;
+    public Vector3 unitSize;
 
     public GameObject unitPrefab;
 
@@ -17,7 +17,7 @@ public class Unit_production : MonoBehaviour
 
 
     public float time = 0;
-    public float Rtime = 0;
+    public float coolTime = 0;
 
     private bool buttonActive = true;
 
@@ -25,7 +25,7 @@ public class Unit_production : MonoBehaviour
     {
         Button btn = productionButton.GetComponent<Button>();
         btn.onClick.AddListener(TaskOnClick);
-        time = Rtime;
+        time = coolTime;
     }
 
     void Update()
@@ -37,7 +37,7 @@ public class Unit_production : MonoBehaviour
             {
                 productionButton.interactable = true;
                 buttonActive = true;
-                time = Rtime;
+                time = coolTime;
             }
         }
     }
@@ -51,8 +51,8 @@ public class Unit_production : MonoBehaviour
                 Debug.Log("Unit production Start!");
                 money.AddMoney(-prod_needMoney);
                 //Instantiate(Unit, new Vector3(x, y, z), Quaternion.identity);
-                GameObject unit = ObjectPoolManager.Instance.GetObjectFromPool(unitPrefab, Quaternion.identity, size);
-                unit.transform.position = location;
+                GameObject unit = ObjectPoolManager.Instance.GetObjectFromPool(unitPrefab, Quaternion.identity, unitSize);
+                unit.transform.position = unitLocation;
 
                 Debug.Log("Unit production Success");
 

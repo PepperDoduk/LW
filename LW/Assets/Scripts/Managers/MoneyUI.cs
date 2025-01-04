@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -26,7 +26,7 @@ public class MoneyUI : MonoBehaviour
 
     void Update()
     {
-        moneyUI.text = money + " WM";
+        moneyUI.text = money + " ₽";
     }
 
     public void AddMoney(int money)

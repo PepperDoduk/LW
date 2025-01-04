@@ -10,7 +10,7 @@ public class Generator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        hp = 15000;
+        hp = 100000;
     }
 
     // Update is called once per frame
@@ -30,35 +30,57 @@ public class Generator : MonoBehaviour
     {
         if (other.gameObject.CompareTag("125mm"))
         {
-            MinusHealthPoint(-600);
+            MinusHealthPoint(-750);
         }
         if (other.gameObject.CompareTag("115mm"))
         {
-            MinusHealthPoint(-450);
+            MinusHealthPoint(-550);
         }
-
         if (other.gameObject.CompareTag("210mm"))
         {
-            MinusHealthPoint(-750);
+            MinusHealthPoint(-1050);
+        }
+        if (other.gameObject.CompareTag("35mm"))
+        {
+            MinusHealthPoint(-55);
+        }
+        if (other.gameObject.CompareTag("Kh38"))
+        {
+            MinusHealthPoint(-6500);
+        }
+        if (other.gameObject.CompareTag("30mmHE"))
+        {
+            MinusHealthPoint(-45);
+        }
+        if (other.gameObject.CompareTag("striker"))
+        {
+            MinusHealthPoint(-450);
         }
 
         if (other.gameObject.CompareTag("500KG"))
         {
             MinusHealthPoint(-10000);
         }
-
         if (other.gameObject.CompareTag("Rpg"))
         {
-            MinusHealthPoint(-400);
+            MinusHealthPoint(-250);
+        }
+        if (other.gameObject.CompareTag("12mm"))
+        {
+            MinusHealthPoint(-30);
+        }
+        if (other.gameObject.CompareTag("152mmHE"))
+        {
+            MinusHealthPoint(-4500);
         }
         if (other.gameObject.CompareTag("7.62mm"))
         {
-            MinusHealthPoint(-40);
+            MinusHealthPoint(-10);
+        }
+
+    }
+        public float ReturnHp()
+        {
+            return hp;
         }
     }
-
-    public float ReturnHp()
-    {
-        return hp;
-    }
-}

@@ -57,7 +57,7 @@ public class ARAMTA : MonoBehaviour
         public const int Stop = 3;
     }
 
-    void Start()
+    void OnEnable()
     {
         isDied = false;
         anim = GetComponent<Animator>();
@@ -65,6 +65,7 @@ public class ARAMTA : MonoBehaviour
         animNum = AN.Move;
         anim.SetInteger("ARMATA", animNum);
         ammo12mm = 1;
+        distance = 100;
     }
 
     void Update()

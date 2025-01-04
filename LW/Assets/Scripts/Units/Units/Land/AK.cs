@@ -21,10 +21,10 @@ public class AK : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
-        HP = 150;
-        moveSpeed = 1.3f;
+        HP = 250;
+        moveSpeed = 1.5f;
         AttackCoolTime = 1.1f;
-        intersection = 5f;
+        intersection = 20f;
         anim.SetInteger("AK_anim", (int)1);
     }
 

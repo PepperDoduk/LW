@@ -15,7 +15,7 @@ public class Tank_115mm : MonoBehaviour
 
     void Update()
     {
-        Vector3 movement = new Vector3(30.0f, 0.0f, 0.0f);
+        Vector3 movement = new Vector3(75.0f, 0.0f, 0.0f);
         transform.Translate(movement* Time.deltaTime);
     }
 
@@ -25,7 +25,7 @@ public class Tank_115mm : MonoBehaviour
         {
             Audiomanager_prototype.instance.PlaySfx(Audiomanager_prototype.Sfx.TankHit);
             GameObject explosion = ObjectPoolManager.Instance.GetObjectFromPool(explosionPrefab, Quaternion.identity, new Vector3(0.7f, 0.7f, 1));
-            explosion.transform.position = transform.position; //new Vector3(transform.position.x - 1, transform.position.y, 0);
+            explosion.transform.position = transform.position;
 
             StartCoroutine(objectPool.ReturnToPoolAfterDelay(0));
         }

@@ -14,7 +14,7 @@ public class Tank_125mm : MonoBehaviour
 
     void Update()
     {
-        Vector3 movement = new Vector3(55.0f, 0.0f, 0.0f);
+        Vector3 movement = new Vector3(65.0f, 0.0f, 0.0f);
         transform.Translate(movement* Time.deltaTime);
     }
 

@@ -4774,6 +4774,9 @@ ParticleSystemRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -9604,6 +9607,9 @@ ParticleSystemRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -9672,6 +9678,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: su-57
       objectReference: {fileID: 0}
+    - target: {fileID: -8653719598885068355, guid: 707f0647d4724df4cbf75805ac8bb27c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 707f0647d4724df4cbf75805ac8bb27c, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.75
@@ -9682,15 +9692,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 707f0647d4724df4cbf75805ac8bb27c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -239
+      value: -174.43832
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 707f0647d4724df4cbf75805ac8bb27c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.25
+      value: -11.093952
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 707f0647d4724df4cbf75805ac8bb27c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.2555092
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 707f0647d4724df4cbf75805ac8bb27c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -9698,15 +9708,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 707f0647d4724df4cbf75805ac8bb27c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 707f0647d4724df4cbf75805ac8bb27c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 707f0647d4724df4cbf75805ac8bb27c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 707f0647d4724df4cbf75805ac8bb27c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -9742,6 +9752,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: 707f0647d4724df4cbf75805ac8bb27c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4877515019603274472}
+    - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: 707f0647d4724df4cbf75805ac8bb27c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -3482019009964697652}
   m_SourcePrefab: {fileID: 4843985084834002234, guid: 707f0647d4724df4cbf75805ac8bb27c, type: 3}
 --- !u!1 &7437348376721703878 stripped
 GameObject:
@@ -9789,7 +9802,7 @@ MonoBehaviour:
   speedNum: 1
 --- !u!95 &8288961987952582899
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -9803,6 +9816,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -9831,6 +9845,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 256ff062792691c48a83cc3c688392fc, type: 3}
+  m_Resource: {fileID: 8300000, guid: 256ff062792691c48a83cc3c688392fc, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.441
   m_Pitch: 1
@@ -9916,6 +9931,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-3482019009964697652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7437348376721703878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d8a184113f50a54f95468e47ed4b875, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 7437348376721703878}
+  disableTime: -1
 --- !u!4 &8646591487558556581 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -7552582706839291426, guid: 707f0647d4724df4cbf75805ac8bb27c, type: 3}

@@ -13,6 +13,10 @@ PrefabInstance:
       value: MSTA
       objectReference: {fileID: 0}
     - target: {fileID: -8653719598885068355, guid: 5c9a362260db90d498ecb49f7143f302, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8653719598885068355, guid: 5c9a362260db90d498ecb49f7143f302, type: 3}
       propertyPath: m_TagString
       value: Unit
       objectReference: {fileID: 0}
@@ -26,15 +30,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 5c9a362260db90d498ecb49f7143f302, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -105.22
+      value: -17.02832
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 5c9a362260db90d498ecb49f7143f302, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.41
+      value: -8.253952
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 5c9a362260db90d498ecb49f7143f302, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.2555092
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 5c9a362260db90d498ecb49f7143f302, type: 3}
       propertyPath: m_LocalRotation.w
@@ -42,15 +46,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 5c9a362260db90d498ecb49f7143f302, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 5c9a362260db90d498ecb49f7143f302, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 5c9a362260db90d498ecb49f7143f302, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 5c9a362260db90d498ecb49f7143f302, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -200,7 +204,8 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   HP: 4500
   AttackCoolTime: 10
-  bombPrefab: {fileID: 8683968501033214702, guid: c9c842ec802fb9445a25deb2f80cb998, type: 3}
+  bombPrefab_curve: {fileID: 8683968501033214702, guid: c9c842ec802fb9445a25deb2f80cb998, type: 3}
+  bombPrefab_direct: {fileID: 8683968501033214702, guid: 33a1105b9cdce3444870f70b01d6c3ea, type: 3}
   bulletPrefab: {fileID: 8683968501033214702, guid: 99e9a07a8c7a845458deae5c037261b4, type: 3}
   shake: {fileID: 0}
   MuzzleFlashPrefab_152mm: {fileID: 8912767448822040767, guid: 4dad670181441ad49a879e7b1693a638, type: 3}

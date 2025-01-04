@@ -6,6 +6,7 @@ public class T90_test : MonoBehaviour
 {
     [SerializeField] private GameObject T90muzzleFlashPrefab;
     [SerializeField] private GameObject muzzleFlashPrefab;
+    [SerializeField] private GameObject bulletPrefab;
 
     public string targetTag = "Enemy";
     public float moveSpeed = 2f;
@@ -23,6 +24,19 @@ public class T90_test : MonoBehaviour
     public ObjectPool pool; 
 
     public GameObject bomb;
+
+    public Vector3 sizeOfBomb;
+    public Vector3 locationOfBomb;
+
+    public Vector3 sizeOfMuzzleFlash;
+    public Vector3 locationOfMuzzleFlash;
+
+    public Vector3 sizeOfBullet12;
+    public Vector3 locationOfBullet12;
+
+    public Vector3 sizeOfMuzzleFlash12;
+    public Vector3 locationOfMuzzleFlash12;
+
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -35,7 +49,7 @@ public class T90_test : MonoBehaviour
 
         if (intersection < distance && distance>25)
         {
-            moveSpeed = 3;
+            moveSpeed = 4.5f;
         }
         else
         {
@@ -44,9 +58,7 @@ public class T90_test : MonoBehaviour
 
         if (HP < 0)
         {
-            //AudioManager.instance.PlaySfx(AudioManager.Sfx.TankDestroy);
             Audiomanager_prototype.instance.PlaySfx(Audiomanager_prototype.Sfx.TankDestroy);
-            //Destroy(gameObject, 0.3f);
             StartCoroutine(pool.ReturnToPoolAfterDelay(0.3f));
         }
 
@@ -92,14 +104,16 @@ public class T90_test : MonoBehaviour
         if (ammo7_62mm > 0)
         {
             ammo7_62mm = 0;
-            //AudioManager.instance.PlaySfx(AudioManager.Sfx.PKM);
+            
             Audiomanager_prototype.instance.PlaySfx(Audiomanager_prototype.Sfx.PKM);
 
             for (int i = 0; i < 19; i++)
             {
-                //Instantiate(bullet, new Vector3(transform.position.x, transform.position.y + 5.6f, 0), Quaternion.Euler(0, 0, Random.Range(-0.3f, 0.3f)));
-                GameObject muzzleFlash = ObjectPoolManager.Instance.GetObjectFromPool(muzzleFlashPrefab, Quaternion.identity, new Vector3(0.6f, 0.6f, 1));
-                muzzleFlash.transform.position = new Vector3(transform.position.x + 0.6f, transform.position.y + 2.5f, -2);
+                GameObject muzzleFlash = ObjectPoolManager.Instance.GetObjectFromPool(muzzleFlashPrefab, Quaternion.identity,sizeOfMuzzleFlash12);
+                muzzleFlash.transform.position = transform.position + locationOfMuzzleFlash12;
+
+                GameObject bullet = ObjectPoolManager.Instance.GetObjectFromPool(bulletPrefab, Quaternion.identity, sizeOfBullet12);
+                muzzleFlash.transform.position = transform.position + locationOfBullet12;
                 yield return new WaitForSeconds(0.15f);
             }
 
@@ -122,14 +136,15 @@ public class T90_test : MonoBehaviour
     }
     public void MuzzleFlash()
     {
-        GameObject t90muzzleFlash = ObjectPoolManager.Instance.GetObjectFromPool(T90muzzleFlashPrefab, Quaternion.identity, new Vector3(0.4f, 0.2f, 1));
-        t90muzzleFlash.transform.position = new Vector3(transform.position.x + 2.45f, transform.position.y + 1.53f, 0);
+        GameObject t90muzzleFlash = ObjectPoolManager.Instance.GetObjectFromPool(T90muzzleFlashPrefab, Quaternion.identity, sizeOfMuzzleFlash);
+        t90muzzleFlash.transform.position = transform.position + locationOfMuzzleFlash;
     }
 
     public void PlaySound()
     {
         audioSource.Play();
-        Instantiate(bomb, new Vector3(transform.position.x+2, transform.position.y + 1.62f, 3), Quaternion.identity);
+        GameObject t90_115mm = ObjectPoolManager.Instance.GetObjectFromPool(bomb, Quaternion.identity, sizeOfBomb);
+        t90_115mm.transform.position = transform.position + locationOfBomb;
     }
 
     public void MinusHealthPoint(float atk)

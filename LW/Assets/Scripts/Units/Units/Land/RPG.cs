@@ -22,10 +22,10 @@ public class RPG : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-        HP = 50;
-        moveSpeed = 0.4f;
+        HP = 250;
+        moveSpeed = 1.4f;
         attackCoolTime = 4.3f;
-        intersection = 15f;
+        intersection = 26f;
         anim.SetInteger("RPG_anim", (int)1);
 
         audioSource = GetComponent<AudioSource>();

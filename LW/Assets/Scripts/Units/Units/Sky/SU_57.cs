@@ -89,15 +89,15 @@ public class SU_57 : MonoBehaviour
             transform.position = new Vector3(transform.position.x, transform.position.y, 0);
        }
 
-        //if (transform.position.x > 200)
-        //{
-        //    StartCoroutine(TurnToLeft());
-        //}
+        if (transform.position.x > 200)
+        {
+            StartCoroutine(TurnToLeft());
+        }
 
-        //if (transform.position.x < -260)
-        //{
-        //    StartCoroutine(TurnToRight());
-        //}
+        if (transform.position.x < -260)
+        {
+            StartCoroutine(TurnToRight());
+        }
 
         if (distance < 90 && isFlying && transform.position.y > 50 && distance>80 && speedNum ==1)
         {
@@ -264,21 +264,21 @@ public class SU_57 : MonoBehaviour
         animNum = AN.Idle;
     }
 
-    //public IEnumerator TurnToLeft()
-    //{
-    //    speedNum = -1;
-    //    targetRotation = Quaternion.Euler(0f, -180f, 0);
-    //    moveSpeed = -60;
-    //    yield return new WaitForSeconds(0f);
+    public IEnumerator TurnToLeft()
+    {
+        speedNum = -1;
+        targetRotation = Quaternion.Euler(0f, -180f, 0);
+        moveSpeed = -60;
+        yield return new WaitForSeconds(0f);
 
-    //}
-    //public IEnumerator TurnToRight()
-    //{
-    //    speedNum = 1;
-    //    targetRotation = Quaternion.Euler(0f, 0f, 0f);
-    //    moveSpeed = 60;
-    //    yield return new WaitForSeconds(0f);
+    }
+    public IEnumerator TurnToRight()
+    {
+        speedNum = 1;
+        targetRotation = Quaternion.Euler(0f, 0f, 0f);
+        moveSpeed = 60;
+        yield return new WaitForSeconds(0f);
 
-    //}
+    }
 
 }

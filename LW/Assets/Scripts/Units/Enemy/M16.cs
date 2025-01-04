@@ -120,7 +120,7 @@ public class M16: MonoBehaviour
         }
         if (other.gameObject.CompareTag("12mm"))
         {
-            MinusHealthPoint(-75);
+            MinusHealthPoint(-65);
         }
         if (other.gameObject.CompareTag("35mm"))
         {
@@ -130,6 +130,15 @@ public class M16: MonoBehaviour
         {
             MinusHealthPoint(-5500);
         }
+        if (other.gameObject.CompareTag("30mmHE"))
+        {
+            MinusHealthPoint(-150);
+        }
+        if (other.gameObject.CompareTag("striker"))
+        {
+            MinusHealthPoint(-450);
+        }
+
         if (other.gameObject.CompareTag("Kh38"))
         {
             MinusHealthPoint(-3000);
