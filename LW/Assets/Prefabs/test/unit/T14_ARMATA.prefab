@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8653719598885068355, guid: 05656df8e2bb9f443bf18540ac24d7dd, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8653719598885068355, guid: 05656df8e2bb9f443bf18540ac24d7dd, type: 3}
       propertyPath: m_TagString
@@ -22,19 +22,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 05656df8e2bb9f443bf18540ac24d7dd, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.5
+      value: 0.55
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 05656df8e2bb9f443bf18540ac24d7dd, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.5
+      value: 0.55
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 05656df8e2bb9f443bf18540ac24d7dd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -87.048
+      value: -53.8
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 05656df8e2bb9f443bf18540ac24d7dd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.217
+      value: -4.899
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 05656df8e2bb9f443bf18540ac24d7dd, type: 3}
       propertyPath: m_LocalPosition.z
@@ -170,14 +170,14 @@ MonoBehaviour:
   moveSpeed: 4
   distance: 50
   intersection: 40
-  sizeOfBomb: {x: 1, y: 1, z: 1}
-  locationOfBomb: {x: 1.91, y: 2.58, z: 0}
+  sizeOfBomb: {x: 1, y: 1.25, z: 1}
+  locationOfBomb: {x: 3.73, y: 2.88, z: 0}
   sizeOfMuzzleFlash: {x: 1.5, y: 1.5, z: 1}
-  locationOfMuzzleFlash: {x: 4, y: 2.09, z: 0}
+  locationOfMuzzleFlash: {x: 4.68, y: 2.38, z: 0}
   sizeOfBullet12: {x: 0.2, y: 0.2, z: 1}
   locationOfBullet12: {x: -1.11, y: 3.43, z: 0}
   sizeOfMuzzleFlash12: {x: 1, y: 1, z: 1}
-  locationOfMuzzleFlash12: {x: -1.2, y: 4.12, z: 0}
+  locationOfMuzzleFlash12: {x: -1.29, y: 4.48, z: 0}
   animNum: 0
   ammo12mm: 1
   ammoStriker: 1

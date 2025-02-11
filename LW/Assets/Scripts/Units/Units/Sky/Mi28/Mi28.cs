@@ -69,6 +69,8 @@ public class Mi28 : MonoBehaviour
 
     public bool isMoveBack = false;
 
+    public float healthPoint;
+
     void Start()
     {
         StartCoroutine(TakingOff());
@@ -203,7 +205,7 @@ public class Mi28 : MonoBehaviour
 
         isMoveBack = true;
 
-        float moveBackDuration = 3.5f;
+        float moveBackDuration = 5f;
         float elapsed = 0f;
 
         Vector3 moveDirection = -transform.right;

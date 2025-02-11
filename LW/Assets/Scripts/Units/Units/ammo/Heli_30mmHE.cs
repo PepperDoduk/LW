@@ -20,7 +20,7 @@ public class Heli_30mmHE : MonoBehaviour
 
     void OnEnable()
     {
-        int randomAngleOffset = Random.Range(-12, 10);
+        int randomAngleOffset = Random.Range(-6, 6);
         angle = -15 + randomAngleOffset;
         float radians = angle * Mathf.Deg2Rad;
         Vector2 initialVelocity = new Vector2(speed * Mathf.Cos(radians), speed * Mathf.Sin(radians));

@@ -77,16 +77,16 @@ public class Audiomanager_prototype : MonoBehaviour
             sfxVolumes = new float[sfxClips.Length];
             for (int i = 0; i < sfxVolumes.Length; i++)
             {
-                sfxVolumes[i] = 100f; 
+                //sfxVolumes[i] = 100f; 
             }
-            sfxVolumes[9] = 20;
-            sfxVolumes[8] = 70;
-            sfxVolumes[7] = 50;
-            sfxVolumes[10] = 60;
-            sfxVolumes[11] = 60;
-            sfxVolumes[12] = 60;
-            sfxVolumes[15] = 80;
-            sfxVolumes[16] = 200;
+            //sfxVolumes[9] = 20;
+            //sfxVolumes[8] = 70;
+            //sfxVolumes[7] = 50;
+            //sfxVolumes[10] = 60;
+            //sfxVolumes[11] = 60;
+            //sfxVolumes[12] = 60;
+            //sfxVolumes[15] = 80;
+            //sfxVolumes[16] = 200;
         }
 
         SetBgmVolume(bgmVolume);

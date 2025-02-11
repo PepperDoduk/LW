@@ -6,6 +6,7 @@ public class UI_Leave : MonoBehaviour
 {
     public UnityEngine.UI.Image button;
     public TextMeshProUGUI text;
+    public GameManager gameManager;
     public GameObject[] willCloseUI;
     public void Click()
     {
@@ -14,8 +15,10 @@ public class UI_Leave : MonoBehaviour
         Audiomanager_prototype.instance.PlaySfx(Audiomanager_prototype.Sfx.MouseClick);
         for (int i = 0; i < willCloseUI.Length; ++i)
         {
+            if(gameManager != null && gameManager.isEscPopup)
+                gameManager.isEscPopup = false;
             willCloseUI[i].SetActive(false);
         }
-        Time.timeScale = 1f;
+        Time.timeScale = 1f;    
     }
 }

@@ -70,6 +70,8 @@ public class ARAMTA : MonoBehaviour
 
     void Update()
     {
+
+
         anim.SetInteger("ARMATA", animNum);
 
         if (HP < 0)
@@ -102,7 +104,6 @@ public class ARAMTA : MonoBehaviour
             isAttacking = false;
             anim.SetInteger("ARMATA", animNum);
 
-            // 움직임 처리
             Vector3 nowPosition = transform.position;
             nowPosition.x += moveSpeed * Time.deltaTime;
             transform.position = nowPosition;

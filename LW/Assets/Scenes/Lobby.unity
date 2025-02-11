@@ -207,7 +207,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 233952406}
         m_TargetAssemblyTypeName: GameQuit, Assembly-CSharp
-        m_MethodName: Click
+        m_MethodName: ClickToGameQuit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

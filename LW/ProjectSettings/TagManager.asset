@@ -22,6 +22,16 @@ TagManager:
   - 152mmHE
   - 30mmHE
   - striker
+  - area_FW
+  - area_FE
+  - AREA
+  - OccupiedArea
+  - EnemyArea
+  - Estriker
+  - E30mmHE
+  - AirUnit
+  - AirEnemy
+  - Eantiair
   layers:
   - Default
   - TransparentFX

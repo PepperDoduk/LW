@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6009372334488873892}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -46.88114, y: -25.763134, z: -11.474491}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -45,8 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5114641c48a73ff4eae712be5bfd666e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bgmClips: []
-  bgmVolume: 0
+  bgmClips:
+  - {fileID: 8300000, guid: 60f0cd01580c44f4db683999883c9221, type: 3}
+  bgmVolume: 30
   sfxClips:
   - {fileID: 8300000, guid: e9d262a980eaeae42bd3d1bd0a682315, type: 3}
   - {fileID: 8300000, guid: cba111cba126a90439d1bfeba921564b, type: 3}
@@ -56,8 +57,14 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 845c1c7d4d81773499980d497c128af0, type: 3}
   - {fileID: 8300000, guid: d04e2c5d41d610947bf290fd51a58383, type: 3}
   - {fileID: 8300000, guid: 48b190f8fb76fe341b028fcf43f111e1, type: 3}
-  - {fileID: 8300000, guid: 9b52a90449635d94c9571106c24b3ebd, type: 3}
+  - {fileID: 8300000, guid: 4ea74a31c64bec54baa06686bb99913e, type: 3}
   - {fileID: 8300000, guid: 38d4f671df35d8a439aabfebc2574f33, type: 3}
+  - {fileID: 8300000, guid: a4eb09ff4bb7858469b843e6d1bc6707, type: 3}
+  - {fileID: 8300000, guid: e6379d6133b25b243897ac8726724647, type: 3}
+  - {fileID: 8300000, guid: 5a17250cb0478884e85027673a59da46, type: 3}
+  - {fileID: 8300000, guid: 4ad3128c8315b60418dea397ff2e2efb, type: 3}
+  - {fileID: 8300000, guid: 6dd72118480fcf5479fd6aa66b72bc9e, type: 3}
+  - {fileID: 8300000, guid: f9bea0247ea65e74ca0fb8d56353501c, type: 3}
   sfxVolumes:
   - 100
   - 100
@@ -66,10 +73,16 @@ MonoBehaviour:
   - 100
   - 100
   - 100
-  - 100
-  - 100
+  - 50
+  - 70
   - 20
-  channels: 5
+  - 50
+  - 50
+  - 50
+  - 50
+  - 50
+  - 50
+  channels: 200
   audioMixer: {fileID: 24100000, guid: d349ec25c13074e41b68f27891c6f838, type: 2}
   bgmMixerGroupName: BGMVolume
   sfxMixerGroupName: SFXVolume
@@ -84,6 +97,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
