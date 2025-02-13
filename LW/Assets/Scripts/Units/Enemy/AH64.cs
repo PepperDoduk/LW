@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections;
-using UnityEngine.Rendering;
+using static ObjectPoolManager;
 
 public class AH64 : MonoBehaviour
 {
@@ -77,6 +77,8 @@ public class AH64 : MonoBehaviour
     public float maxHP = 3500;
 
     private SpriteRenderer[] spriteRenderers;
+    private bool isDied;
+    public ObjectPool pool;
 
     void Start()
     {
@@ -88,7 +90,7 @@ public class AH64 : MonoBehaviour
         flare = 5;
 
         distance = 200;
-        distanceToAirUnit = 200;
+        distanceToAirUnit = 500;
 
         moveSpeed = 0;
 
@@ -138,10 +140,21 @@ public class AH64 : MonoBehaviour
     void Update()
     {
 
+
+        if (healthPoint < 0)
+        {
+            isDied = true;
+            if (isDied)
+                Audiomanager_prototype.instance.PlaySfx(Audiomanager_prototype.Sfx.TankDestroy);
+
+            StartCoroutine(pool.ReturnToPoolAfterDelay(0f));
+            ApplyDarkenEffect();
+            isDied = false;
+        }
         ApplyDarkenEffect();
         if (isFlying)
         {
-            float sinY = 19.5f + Mathf.Sin(Time.time) * 1.5f;
+            float sinY = 17.5f + Mathf.Sin(Time.time) * 1.5f;
             transform.position = new Vector3(transform.position.x, sinY, transform.position.z);
         }
 
@@ -214,7 +227,7 @@ public class AH64 : MonoBehaviour
 
     void HandleMovement()
     {
-        if (distance < 30 && !isMoveBack)
+        if (distance < 30)
         {
             StartCoroutine(MoveBack());
         }
@@ -334,7 +347,7 @@ public class AH64 : MonoBehaviour
         float elapsed = 0f;
 
         startY = transform.position.y;
-        targetY = 18f;
+        targetY = 16f;
 
         while (elapsed < takeOffDuration)
         {
@@ -399,7 +412,7 @@ public class AH64 : MonoBehaviour
             Audiomanager_prototype.instance.PlaySfx(Audiomanager_prototype.Sfx.TitanMissle);
 
             GameObject antiAirRocket = ObjectPoolManager.Instance.GetObjectFromPool(antiAircraftRocket, Quaternion.identity, new Vector3(-0.2f, 0.2f, 0.2f));
-            antiAirRocket.transform.position = transform.position + locationOfMissile + new Vector3(0, -1, 0);
+            antiAirRocket.transform.position = transform.position + locationOfMissile + new Vector3(0, 1, 0);
             //antiAirRocket.transform.rotation = transform.rotation;
             yield return new WaitForSeconds(0.6f);
         }
@@ -437,13 +450,6 @@ public class AH64 : MonoBehaviour
         distanceToAirUnit = closestDistanceToAirUnit;
     }
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        //if (other.gameObject.CompareTag("AntiAir"))
-        //{
-        //    PlusHP(-2500);
-        //}
-    }
 
     public void PlusHP(float atk)
     {
@@ -492,6 +498,35 @@ public class AH64 : MonoBehaviour
         moveSpeed = 40;
         yield return null;
 
+    }
+
+    public void MinusHP(float atk)
+    {
+        this.healthPoint += atk;
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        //if (other.gameObject.CompareTag("E125mm"))
+        //{
+        //    MinusHP(-500);
+        //}
+        //if (other.gameObject.CompareTag("E762"))
+        //{
+        //    MinusHP(-20);
+        //}
+        //if (other.gameObject.CompareTag("EBGM109"))
+        //{
+        //    MinusHP(-6500);
+        //}
+        if (other.gameObject.CompareTag("AntiAir"))
+        {
+            MinusHP(-1000);
+        }
+        if (other.gameObject.CompareTag("30mmHE"))
+        {
+            MinusHP(-110);
+        }
     }
 
 }

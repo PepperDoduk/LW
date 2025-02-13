@@ -863,8 +863,8 @@ ScriptedImporter:
     spritePosition: {x: 158, y: 500}
   - name: body
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 0.6924852, y: 0.41426194}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:

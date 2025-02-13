@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using static ObjectPoolManager;
 
 public class Mi28 : MonoBehaviour
 {
@@ -70,6 +71,18 @@ public class Mi28 : MonoBehaviour
     public bool isMoveBack = false;
 
     public float healthPoint;
+    public float maxHP = 4500;
+    private bool isDied;
+
+    public ObjectPool pool;
+
+    private SpriteRenderer[] spriteRenderers;
+
+    [SerializeField] private GameObject smokePrefab;
+    [SerializeField] private GameObject antiAircraftRocket;
+
+    public float airIntersection = 80;
+    public float distanceToAirUnit;
 
     void Start()
     {
@@ -91,10 +104,38 @@ public class Mi28 : MonoBehaviour
         isAttacking = false;
         stop = false;
         isFlying = false;
+        isDied = false;
+
+        healthPoint = maxHP;
+
+        spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
     }
 
     void Update()
     {
+        if (healthPoint < 0)
+        {
+            isDied = true;
+            if (isDied)
+                Audiomanager_prototype.instance.PlaySfx(Audiomanager_prototype.Sfx.TankDestroy);
+
+            StartCoroutine(pool.ReturnToPoolAfterDelay(0f));
+            ApplyDarkenEffect();
+            isDied = false;
+        }
+
+        if (distanceToAirUnit <= airIntersection)
+        {
+            StartCoroutine(AntiAircraft());
+        }
+
+        ApplyDarkenEffect();
+        if ((Time.frameCount % 50 == 0) && healthPoint < 2500)
+        {
+            GameObject smoke = ObjectPoolManager.Instance.GetObjectFromPool(smokePrefab, Quaternion.identity, new Vector3(1, 1, 1));
+            smoke.transform.position = transform.position + new Vector3(-3, 0, 0);
+        }
+
         if (isFlying)
         {
             float sinY = 19.5f + Mathf.Sin(Time.time) * 1.5f;
@@ -104,7 +145,7 @@ public class Mi28 : MonoBehaviour
         if (Time.frameCount % 5 == 0)
         {
             LocateTarget();
-            LocateBase();
+            LocateAirTarget();
         }
 
         if (moveSpeed == 0)
@@ -149,6 +190,27 @@ public class Mi28 : MonoBehaviour
         }
     }
 
+    void SetColor(Color color)
+    {
+        foreach (var renderer in spriteRenderers)
+        {
+            renderer.color = color;
+        }
+    }
+    void ApplyDarkenEffect()
+    {
+        float hpRatio = Mathf.Clamp01(healthPoint / maxHP);
+        if (hpRatio > 0.8f)
+        {
+            SetColor(Color.white);
+            return;
+        }
+        float normalizedRatio = Mathf.Clamp01(hpRatio / 0.8f);
+        float darkenAmount = Mathf.Lerp(1f, 0.3f, 1 - normalizedRatio);
+
+        Color darkenColor = new Color(darkenAmount, darkenAmount, darkenAmount, 1f);
+        SetColor(darkenColor);
+    }
     void HandleMovement()
     {
         if (distance < 30 && !isMoveBack)
@@ -156,45 +218,55 @@ public class Mi28 : MonoBehaviour
             StartCoroutine(MoveBack());
         }
         else {
-            if (isFlying && !isLanded && !stop && distance > intersection)
+            if (((distanceToAirUnit <= airIntersection) && (distance <= intersection)) ||
+                (distanceToAirUnit <= airIntersection) ||
+                (distance <= intersection))
             {
-
-                accelerationElapsed += Time.deltaTime;
-                if (accelerationElapsed > accelerationDuration)
-                {
-                    accelerationElapsed = accelerationDuration;
-                }
-
-                float t = accelerationElapsed / accelerationDuration;
-                moveSpeed = Mathf.Lerp(0, targetSpeed, t);
-
-                targetRotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, -13f);
+                Stop();
             }
             else
             {
-                if (moveSpeed > 0)
-                {
-                    accelerationElapsed -= Time.deltaTime;
-                    if (accelerationElapsed < 0)
-                    {
-                        accelerationElapsed = 0;
-                    }
-
-                    float t = accelerationElapsed / accelerationDuration;
-                    moveSpeed = Mathf.Lerp(0, targetSpeed, t);
-                }
-                else
-                {
-                    moveSpeed = 0;
-                    accelerationElapsed = 0;
-                    targetRotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f);
-                }
+                Move();
             }
 
             Vector3 moveDirection = transform.right;
             transform.position += moveDirection * moveSpeed * Time.deltaTime;
 
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * duration);
+        }
+    }
+
+    public void Move()
+    {
+        accelerationElapsed += Time.deltaTime;
+        if (accelerationElapsed > accelerationDuration)
+        {
+            accelerationElapsed = accelerationDuration;
+        }
+
+        float t = accelerationElapsed / accelerationDuration;
+        moveSpeed = Mathf.Lerp(0, targetSpeed, t);
+
+        targetRotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, -13f);
+    }
+    public void Stop()
+    {
+        if (moveSpeed > 0)
+        {
+            accelerationElapsed -= Time.deltaTime;
+            if (accelerationElapsed < 0)
+            {
+                accelerationElapsed = 0;
+            }
+
+            float t = accelerationElapsed / accelerationDuration;
+            moveSpeed = Mathf.Lerp(0, targetSpeed, t);
+        }
+        else
+        {
+            moveSpeed = 0;
+            accelerationElapsed = 0;
+            targetRotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f);
         }
     }
 
@@ -275,6 +347,34 @@ public class Mi28 : MonoBehaviour
         targetY = startY;
     }
 
+    public void MinusHP(float atk)
+    {
+        this.healthPoint += atk;
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        //if (other.gameObject.CompareTag("E125mm"))
+        //{
+        //    MinusHP(-500);
+        //}
+        //if (other.gameObject.CompareTag("E762"))
+        //{
+        //    MinusHP(-20);
+        //}
+        //if (other.gameObject.CompareTag("EBGM109"))
+        //{
+        //    MinusHP(-6500);
+        //}
+        if (other.gameObject.CompareTag("Eantiair"))
+        {
+            MinusHP(-1000);
+        }
+        if (other.gameObject.CompareTag("E30mmHE"))
+        {
+            MinusHP(-110);
+        }
+    }
 
 
 
@@ -317,29 +417,45 @@ public class Mi28 : MonoBehaviour
         distance = closestDistance;
     }
 
-    public void LocateBase()
+    public IEnumerator AntiAircraft()
     {
-        GameObject[] bases = GameObject.FindGameObjectsWithTag("Airbase");
-        float closestDistanceToBase = Mathf.Infinity;
+        if (missile > 0 && !isAttack)
+        {
+            isAttack = true;
+            StartCoroutine(AntiAirRocketFire());
+            yield break;
+        }
+    }
+    public IEnumerator AntiAirRocketFire()
+    {
+        isAttack = true;
+        for (int i = 0; i < 4; ++i)
+        {
+            missile--;
+            Audiomanager_prototype.instance.PlaySfx(Audiomanager_prototype.Sfx.TitanMissle);
+
+            GameObject antiAirRocket = ObjectPoolManager.Instance.GetObjectFromPool(antiAircraftRocket, Quaternion.identity, new Vector3(0.2f, 0.2f, 0.2f));
+            antiAirRocket.transform.position = transform.position + locationOfMissile + new Vector3(0, -1, 0);
+            //antiAirRocket.transform.rotation = transform.rotation;
+            yield return new WaitForSeconds(0.4f);
+        }
+        yield return new WaitForSeconds(10f);
+        isAttack = false;
+    }
+
+    public void LocateAirTarget()
+    {
+        GameObject[] bases = GameObject.FindGameObjectsWithTag("AirEnemy");
+        float closestDistanceToAirUnit = Mathf.Infinity;
         foreach (GameObject baseObj in bases)
         {
             float dist = Vector3.Distance(transform.position, baseObj.transform.position);
-            if (dist < closestDistanceToBase)
+            if (dist < closestDistanceToAirUnit)
             {
-                closestDistanceToBase = dist;
+                closestDistanceToAirUnit = dist;
             }
         }
-        distanceToBase = closestDistanceToBase;
-    }
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-
-        if (other.gameObject.CompareTag(landTag))
-        {
-            isFlying = false;
-            StartCoroutine("Landed");
-        }
+        distanceToAirUnit = closestDistanceToAirUnit;
     }
 
 
@@ -373,7 +489,7 @@ public class Mi28 : MonoBehaviour
     public IEnumerator TurnToLeft()
     {
         speedNum = -1;
-        targetRotation = Quaternion.Euler(0f, -180f, 0);
+        targetRotation = Quaternion.Euler(0f, -0f, 0);
         moveSpeed = -40;
         yield return null;
 
@@ -381,7 +497,7 @@ public class Mi28 : MonoBehaviour
     public IEnumerator TurnToRight()
     {
         speedNum = 1;
-        targetRotation = Quaternion.Euler(0f, 0f, 0f);
+        targetRotation = Quaternion.Euler(0f, -180f, 0f);
         moveSpeed = 40;
         yield return null;
 

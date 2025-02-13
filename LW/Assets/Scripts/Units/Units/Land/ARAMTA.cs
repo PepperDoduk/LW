@@ -1,7 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using System.Drawing;
-using static ObjectPoolManager;
 
 public class ARAMTA : MonoBehaviour
 {
@@ -30,7 +28,7 @@ public class ARAMTA : MonoBehaviour
     public Animator anim;
     public AudioSource audioSource;
 
-    public float HP;
+    public float healthPoint;
     public float AttackCoolTime;
 
     private bool isAttacking = false;
@@ -41,12 +39,17 @@ public class ARAMTA : MonoBehaviour
     [SerializeField] private GameObject MuzzleFlashPrefab_125mm;
     [SerializeField] private GameObject MuzzleFlashPrefab_12mm;
 
+    private SpriteRenderer[] spriteRenderers;
+
     public ObjectPool pool;
 
     public int ammo = 1;
 
     private bool isDied;
     private bool isMoving = false;
+
+    public float maxHP = 8000;
+    [SerializeField] private GameObject smokePrefab;
 
     public static class AN
     {
@@ -66,21 +69,30 @@ public class ARAMTA : MonoBehaviour
         anim.SetInteger("ARMATA", animNum);
         ammo12mm = 1;
         distance = 100;
+        healthPoint = maxHP;
+        spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
     }
 
     void Update()
     {
-
-
-        anim.SetInteger("ARMATA", animNum);
-
-        if (HP < 0)
+        if (healthPoint < 0)
         {
             isDied = true;
             if (isDied)
                 Audiomanager_prototype.instance.PlaySfx(Audiomanager_prototype.Sfx.TankDestroy);
+
             StartCoroutine(pool.ReturnToPoolAfterDelay(0f));
+            ApplyDarkenEffect();
             isDied = false;
+        }
+
+        ApplyDarkenEffect();
+        anim.SetInteger("ARMATA", animNum);
+
+        if ((Time.frameCount % 50 == 0) && healthPoint < 3000)
+        {
+            GameObject smoke = ObjectPoolManager.Instance.GetObjectFromPool(smokePrefab, Quaternion.identity, new Vector3(1, 1, 1));
+            smoke.transform.position = transform.position + new Vector3(-2, 3, 0);
         }
 
         if (Time.frameCount % 15 == 0)
@@ -108,6 +120,28 @@ public class ARAMTA : MonoBehaviour
             nowPosition.x += moveSpeed * Time.deltaTime;
             transform.position = nowPosition;
         }
+    }
+
+    void SetColor(Color color)
+    {
+        foreach (var renderer in spriteRenderers)
+        {
+            renderer.color = color;
+        }
+    }
+    void ApplyDarkenEffect()
+    {
+        float hpRatio = Mathf.Clamp01(healthPoint / maxHP);
+        if (hpRatio > 0.7f)
+        {
+            SetColor(Color.white);
+            return;
+        }
+        float normalizedRatio = Mathf.Clamp01(hpRatio / 0.7f);
+        float darkenAmount = Mathf.Lerp(1f, 0.3f, 1 - normalizedRatio);
+
+        Color darkenColor = new Color(darkenAmount, darkenAmount, darkenAmount, 1f);
+        SetColor(darkenColor);
     }
 
     void FindClosestTarget()
@@ -238,7 +272,7 @@ public class ARAMTA : MonoBehaviour
 
     public void MinusHP(float atk)
     {
-        this.HP += atk;
+        this.healthPoint += atk;
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -250,6 +284,18 @@ public class ARAMTA : MonoBehaviour
         if (other.gameObject.CompareTag("E762"))
         {
             MinusHP(-20);
+        }        
+        if (other.gameObject.CompareTag("EBGM109"))
+        {
+            MinusHP(-6500);
+        }        
+        if (other.gameObject.CompareTag("Estriker"))
+        {
+            MinusHP(-1000);
+        }        
+        if (other.gameObject.CompareTag("E30mmHE"))
+        {
+            MinusHP(-110);
         }
     }
 

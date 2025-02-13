@@ -1,8 +1,8 @@
 using UnityEngine;
+using System.Collections;
 
-public class Eantiair : MonoBehaviour
+public class antiAir : MonoBehaviour
 {
-
     public AudioSource audioSource;
     public ObjectPool objectPool;
 
@@ -15,7 +15,6 @@ public class Eantiair : MonoBehaviour
     public Vector3 ExplosionSize;
     public GameObject Explosion;
 
-
     [SerializeField] private float duration = 1.2f;
     [SerializeField] private Quaternion targetRotation;
     void Awake()
@@ -23,8 +22,10 @@ public class Eantiair : MonoBehaviour
         shake = Camera.main.GetComponent<ScreenShake>();
         audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
-        targetRotation = Quaternion.Euler(0, 0, Random.Range(-10, 6));
+        targetRotation = Quaternion.Euler(0, 0, Random.Range(14, -2));
     }
+
+
     void Update()
     {
         Vector3 moveDirection = transform.right;
@@ -35,13 +36,13 @@ public class Eantiair : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("AirUnit") || other.gameObject.CompareTag("Ground"))
+        if (other.gameObject.CompareTag("AirEnemy") || other.gameObject.CompareTag("Ground"))
         {
             GameObject Striker = ObjectPoolManager.Instance.GetObjectFromPool(Explosion, Quaternion.identity, ExplosionSize);
             Striker.transform.position = transform.position;
 
             Audiomanager_prototype.instance.PlaySfx(Audiomanager_prototype.Sfx.striker_explosion);
-            shake.SetShake(0.3f, 0.3f, 0.8f);
+            shake.SetShake(0.3f, 0.3f, 1f);
             shake.TriggerShake();
 
             StartCoroutine(objectPool.ReturnToPoolAfterDelay(0));
