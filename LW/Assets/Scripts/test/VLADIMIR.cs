@@ -251,6 +251,18 @@ public class VLADIMIR : MonoBehaviour
         {
             MinusHP(-20);
         }
+        if (other.gameObject.CompareTag("EBGM109"))
+        {
+            MinusHP(-6500);
+        }
+        if (other.gameObject.CompareTag("Estriker"))
+        {
+            MinusHP(-1000);
+        }
+        if (other.gameObject.CompareTag("E30mmHE"))
+        {
+            MinusHP(-110);
+        }
     }
 
 

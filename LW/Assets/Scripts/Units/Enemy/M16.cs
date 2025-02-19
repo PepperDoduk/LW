@@ -16,6 +16,7 @@ public class M16: MonoBehaviour
 
     private bool isAttacking = false;
     public GameObject bullet;
+    public ObjectPool pool;
 
     void Start()
     {
@@ -31,7 +32,8 @@ public class M16: MonoBehaviour
     {
         if (HP < 0)
         {
-            Destroy(gameObject,0.2f);
+            //Destroy(gameObject,0.2f);
+            StartCoroutine(pool.ReturnToPoolAfterDelay(0.2f));
 
         }
 

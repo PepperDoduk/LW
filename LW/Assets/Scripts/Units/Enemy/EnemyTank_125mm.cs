@@ -13,7 +13,7 @@ public class EnemyTank_125mm : MonoBehaviour
 
     void Update()
     {
-        Vector3 movement = new Vector3(-30.0f, 0.0f, 0.0f);
+        Vector3 movement = new Vector3(-60.0f, 0.0f, 0.0f);
         transform.Translate(movement* Time.deltaTime);
     }
 

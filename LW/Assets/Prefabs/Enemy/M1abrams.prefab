@@ -92,6 +92,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: 1172e33023207074d9aa944749ac8e83, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4585471085591737930}
+    - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: 1172e33023207074d9aa944749ac8e83, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6181038074192993918}
   m_SourcePrefab: {fileID: 4843985084834002234, guid: 1172e33023207074d9aa944749ac8e83, type: 3}
 --- !u!1 &3839695595042538440 stripped
 GameObject:
@@ -238,6 +241,8 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   HP: 0
   AttackCoolTime: 0
+  isDied: 0
+  pool: {fileID: 6181038074192993918}
 --- !u!61 &4585471085591737930
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -284,3 +289,17 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 14.184822, y: 4.829071}
   m_EdgeRadius: 0
+--- !u!114 &6181038074192993918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3839695595042538440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d8a184113f50a54f95468e47ed4b875, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 3839695595042538440}
+  disableTime: -1

@@ -430,6 +430,7 @@ GameObject:
   - component: {fileID: 4172686458944659071}
   - component: {fileID: 3775719969012452414}
   - component: {fileID: -3124430693465290370}
+  - component: {fileID: -1791797520244281144}
   m_Layer: 0
   m_Name: infantry_M16
   m_TagString: Enemy
@@ -508,6 +509,7 @@ MonoBehaviour:
   HP: 0
   AttackCoolTime: 0
   bullet: {fileID: 8683968501033214702, guid: 4ea6406e4c6f6d14d9c0563f940e4efc, type: 3}
+  pool: {fileID: -1791797520244281144}
 --- !u!82 &3775719969012452414
 AudioSource:
   m_ObjectHideFlags: 0
@@ -651,6 +653,20 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.9245083, y: 2.1317692}
   m_EdgeRadius: 0
+--- !u!114 &-1791797520244281144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3709025904584510162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d8a184113f50a54f95468e47ed4b875, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 3709025904584510162}
+  disableTime: -1
 --- !u!1 &4888972941954569174
 GameObject:
   m_ObjectHideFlags: 0

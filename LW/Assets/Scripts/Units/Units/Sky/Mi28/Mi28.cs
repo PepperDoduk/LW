@@ -429,7 +429,7 @@ public class Mi28 : MonoBehaviour
     public IEnumerator AntiAirRocketFire()
     {
         isAttack = true;
-        for (int i = 0; i < 4; ++i)
+        for (int i = 0; i < 6; ++i)
         {
             missile--;
             Audiomanager_prototype.instance.PlaySfx(Audiomanager_prototype.Sfx.TitanMissle);

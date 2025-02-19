@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Unit_production : MonoBehaviour
 {
+
     public Button productionButton;
     public Vector3 unitLocation;
     public Vector3 unitSize;
@@ -48,7 +49,7 @@ public class Unit_production : MonoBehaviour
         {
             if (money.ReturnMoney() - 1 > prod_needMoney)
             {
-                Debug.Log("Unit production Start!");
+                Debug.Log("Unit production Start");
                 money.AddMoney(-prod_needMoney);
                 //Instantiate(Unit, new Vector3(x, y, z), Quaternion.identity);
                 GameObject unit = ObjectPoolManager.Instance.GetObjectFromPool(unitPrefab, Quaternion.identity, unitSize);

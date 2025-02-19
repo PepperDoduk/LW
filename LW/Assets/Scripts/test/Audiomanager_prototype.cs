@@ -41,6 +41,8 @@ public class Audiomanager_prototype : MonoBehaviour
         explosion30mm,
         MouseEnter,
         MouseClick,
+        RadioOn,
+        RadioEnd,
     }
 
     void Awake()

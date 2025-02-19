@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using static ObjectPoolManager;
 
 public class M1: MonoBehaviour
 {
@@ -16,15 +17,17 @@ public class M1: MonoBehaviour
     public float AttackCoolTime;
 
     private bool isAttacking = false;
-    public bool isDied = false; 
+    public bool isDied = false;
+
+    public ObjectPool pool;
 
     void Start()
     {
         anim = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
-        HP = 6000;
+        HP = 9000;
         AttackCoolTime = 8f;
-        intersection = 25f;
+        intersection = 35f;
         anim.SetInteger("M1_anim", (int)1);
     }
 
@@ -36,46 +39,49 @@ public class M1: MonoBehaviour
 
     void Update()
     {
-        if (HP < 0.01)
+        if (HP < 0)
         {
             isDied = true;
             StopAllCoroutines();
             Audiomanager_prototype.instance.PlaySfx(Audiomanager_prototype.Sfx.TankDestroy);
+            StartCoroutine(pool.ReturnToPoolAfterDelay(0f));
             gameObject.SetActive(false);
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
-
-        if (!isDied)
+        else
         {
-            GameObject[] targets = GameObject.FindGameObjectsWithTag(targetTag);
-
-            float closestDistance = Mathf.Infinity;
-
-            foreach (GameObject target in targets)
+            if (!isDied)
             {
-                float dist = Vector3.Distance(transform.position, target.transform.position);
-                if (dist < closestDistance)
+                GameObject[] targets = GameObject.FindGameObjectsWithTag(targetTag);
+
+                float closestDistance = Mathf.Infinity;
+
+                foreach (GameObject target in targets)
                 {
-                    closestDistance = dist;
+                    float dist = Vector3.Distance(transform.position, target.transform.position);
+                    if (dist < closestDistance)
+                    {
+                        closestDistance = dist;
+                    }
                 }
-            }
 
-            distance = closestDistance;
+                distance = closestDistance;
 
-            if (distance <= intersection)
-            {
-                if (!isAttacking && !isDied)
+                if (distance <= intersection)
                 {
-                    StartCoroutine(FireAndWait());
+                    if (!isAttacking && !isDied)
+                    {
+                        StartCoroutine(FireAndWait());
+                    }
                 }
-            }
-            else if (distance > intersection)
-            {
-                isAttacking = false;
-                anim.SetInteger("M1_anim", (int)1);
-                Vector3 nowPosition = transform.position;
-                nowPosition.x += moveSpeed * -1 * Time.deltaTime;
-                transform.position = nowPosition;
+                else if (distance > intersection)
+                {
+                    isAttacking = false;
+                    anim.SetInteger("M1_anim", (int)1);
+                    Vector3 nowPosition = transform.position;
+                    nowPosition.x += moveSpeed * -1 * Time.deltaTime;
+                    transform.position = nowPosition;
+                }
             }
         }
     }
@@ -130,11 +136,6 @@ public class M1: MonoBehaviour
         if (other.gameObject.CompareTag("striker"))
         {
             MinusHealthPoint(-450);
-        }
-
-        if (other.gameObject.CompareTag("500KG"))
-        {
-            MinusHealthPoint(-10000);
         }
         if (other.gameObject.CompareTag("Rpg"))
         {

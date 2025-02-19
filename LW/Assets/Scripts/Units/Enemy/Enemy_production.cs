@@ -1,32 +1,47 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Enemy_production : MonoBehaviour
 {
-    public GameObject Unit1;
-    public GameObject Unit2;
+    public GameObject[] Units;
     public float x;
     public float y;
     public float z;
+    public Vector3[] unitSize;
+
+    private GameObject[] unit;
+
+    public double unitValue;
 
     void Start()
     {
-        InvokeRepeating("Enemy", 1f, Random.Range(1f, 7f));
+        InvokeRepeating("Enemy", 1f, Random.Range(0.3f, 5.5f));
     }
 
     void Enemy()
     {
-        int randomValue = Random.Range(1, 101); 
+        int randomValue = Random.Range(0, 100);
 
-        if (randomValue <= 79)
+        int unitIndex;
+
+        if (randomValue < 85)  
+            unitIndex = 0;
+        else if (randomValue < 97)
+            unitIndex = 1;
+        else              
+            unitIndex = 2;
+
+        if (Units[unitIndex] == null)
         {
-            Instantiate(Unit1, new Vector3(transform.position.x + x, transform.position.y + y, 0), Quaternion.identity);
+            return;
         }
-        else
-        {
-            Instantiate(Unit2, new Vector3(transform.position.x + x, transform.position.y + y, 0), Quaternion.identity);
-        }
+
+        // GameObject unit = ObjectPoolManager.Instance.GetObjectFromPool(Units[unitIndex], Quaternion.identity, unitSize[unitIndex]);
+        // unit.transform.position = transform.position;
+
+        Instantiate(Units[unitIndex], new Vector3(transform.position.x + x, transform.position.y + y, 0), Quaternion.identity);
     }
+
 }
