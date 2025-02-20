@@ -145,6 +145,14 @@ public class M16: MonoBehaviour
         {
             MinusHealthPoint(-3000);
         }
+        if (other.gameObject.CompareTag("AerialBomb"))
+        {
+            MinusHealthPoint(-5000);
+        }
+        if (other.gameObject.CompareTag("TacNuke"))
+        {
+            MinusHealthPoint(-25000);
+        }
     }
     IEnumerator Shoot()
     {

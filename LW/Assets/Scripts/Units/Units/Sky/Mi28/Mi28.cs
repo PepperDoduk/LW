@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using static ObjectPoolManager;
+using UnityEngine.UI;
 
 public class Mi28 : MonoBehaviour
 {
@@ -84,8 +85,13 @@ public class Mi28 : MonoBehaviour
     public float airIntersection = 80;
     public float distanceToAirUnit;
 
+    public AudioSource audioSource;
+    GameObject sliderObject;
+    private Slider slider;
+
     void Start()
     {
+        
         StartCoroutine(TakingOff());
         startPosition = transform.position;
         startRotation = transform.rotation;
@@ -108,11 +114,25 @@ public class Mi28 : MonoBehaviour
 
         healthPoint = maxHP;
 
+        sliderObject = GameObject.Find("sfxSlider");
         spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+        slider = sliderObject.GetComponent<Slider>();
+        
+
+    }
+
+    private void OnEnable()
+    {
+        healthPoint = maxHP;
     }
 
     void Update()
     {
+        if (slider != null)
+        {
+            audioSource.volume = 0.3f * slider.value;
+        }
+
         if (healthPoint < 0)
         {
             isDied = true;

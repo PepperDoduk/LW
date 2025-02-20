@@ -8,7 +8,7 @@ public class Tu160 : MonoBehaviour
     public GameObject target;
     private void OnEnable()
     {
-        shake = Camera.main.GetComponent<ScreenShake>();
+        
         StartCoroutine(Bombing());
     }
 
@@ -30,7 +30,8 @@ public class Tu160 : MonoBehaviour
         moveSpeed = 0;
         yield return new WaitForSeconds(5);
 
-        moveSpeed = 250;     
-        
+        moveSpeed = 250;
+        yield return new WaitForSeconds(3);
+        gameObject.SetActive(false);
     }
 }

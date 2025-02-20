@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using static ObjectPoolManager;
 
@@ -80,8 +81,14 @@ public class AH64 : MonoBehaviour
     private bool isDied;
     public ObjectPool pool;
 
+    public AudioSource audioSource;
+
+    GameObject sliderObject;
+    private Slider slider;
+
     void Start()
     {
+        
         StartCoroutine(TakingOff());
         startPosition = transform.position;
         startRotation = transform.rotation;
@@ -102,7 +109,10 @@ public class AH64 : MonoBehaviour
         isStop = false;
         isFlying = false;
 
+        sliderObject = GameObject.Find("sfxSlider");
         spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+        slider = sliderObject.GetComponent<Slider>();
+        
 
 
         healthPoint = maxHP;
@@ -139,7 +149,10 @@ public class AH64 : MonoBehaviour
 
     void Update()
     {
-
+        if (slider != null)
+        {
+            audioSource.volume = 0.3f * slider.value;
+        }
 
         if (healthPoint < 0)
         {
@@ -527,6 +540,15 @@ public class AH64 : MonoBehaviour
         {
             MinusHP(-110);
         }
+        if (other.gameObject.CompareTag("AerialBomb"))
+        {
+            MinusHP(-5000);
+        }
+        if (other.gameObject.CompareTag("TacNuke"))
+        {
+            MinusHP(-25000);
+        }
+
     }
 
 }

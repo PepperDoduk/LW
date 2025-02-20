@@ -19,6 +19,8 @@ public class ShowUI : MonoBehaviour
         {
             willShowUIs[i].SetActive(true);
         }
-        gameObject.SetActive(false);
+
+        if (button != null && text != null)
+            gameObject.SetActive(false);
     }
 }

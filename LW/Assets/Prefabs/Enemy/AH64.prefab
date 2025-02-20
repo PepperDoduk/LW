@@ -323,6 +323,7 @@ MonoBehaviour:
   healthPoint: 0
   maxHP: 3500
   pool: {fileID: -4287017343282469466}
+  audioSource: {fileID: 1473927342048923940}
 --- !u!82 &1473927342048923940
 AudioSource:
   m_ObjectHideFlags: 0

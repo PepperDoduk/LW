@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class Audiomanager_prototype : MonoBehaviour
 {
@@ -22,6 +23,9 @@ public class Audiomanager_prototype : MonoBehaviour
     public AudioMixer audioMixer;  
     public string bgmMixerGroupName = "BGMVolume";
     public string sfxMixerGroupName = "SFXVolume";
+
+    public Slider sfxVolumeSlider;
+    public Slider bgmVolumeSlider;
 
     public enum Sfx
     {
@@ -54,6 +58,19 @@ public class Audiomanager_prototype : MonoBehaviour
     void Start()
     {
         PlayBgm(0, true);
+    }
+
+    private void Update()
+    {
+        if(Time.frameCount % 20 == 0)
+        {
+            for (int i = 0; i < sfxVolumes.Length; i++)
+            {
+                sfxVolumes[i] = 100*sfxVolumeSlider.value;
+                bgmVolume = 100*bgmVolumeSlider.value;
+                SetBgmVolume(bgmVolume);
+            }
+        }
     }
 
     void Init()
@@ -155,9 +172,14 @@ public class Audiomanager_prototype : MonoBehaviour
     {
         bgmVolume = Mathf.Clamp(volume, 0f, 200f);
 
-        float mixerVolume = Mathf.Log10(bgmVolume / 100f) * 20f; 
+        // AudioSource 볼륨을 직접 설정
+        bgmPlayer.volume = bgmVolume / 100f;
+
+        // 오디오 믹서의 볼륨도 설정
+        float mixerVolume = Mathf.Log10(bgmVolume / 100f) * 20f;
         audioMixer.SetFloat(bgmMixerGroupName, mixerVolume);
     }
+
 
     public void SetSfxVolume(Sfx sfx, float volume)
     {

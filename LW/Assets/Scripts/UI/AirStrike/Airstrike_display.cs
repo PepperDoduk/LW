@@ -69,12 +69,12 @@ public class Airstrike_display : MonoBehaviour
                 Audiomanager_prototype.instance.PlaySfx(Audiomanager_prototype.Sfx.striker_explosion);
 
                 GameObject airstrike = ObjectPoolManager.Instance.GetObjectFromPool(bombs[0], Quaternion.identity, new Vector3(1, 1, 1));
-                airstrike.transform.position = targetPos.transform.position + new Vector3 (i * 5,0,0);
+                airstrike.transform.position = targetPos.transform.position + new Vector3 (i * Random.Range(5,10),0,0);
 
                 shake.SetShake(0.7f, 0.7f, 1f);
                 shake.TriggerShake();
 
-                yield return new WaitForSeconds(0.2f);
+                yield return new WaitForSeconds(Random.Range(0.1f, 0.6f));
             }
         }
 

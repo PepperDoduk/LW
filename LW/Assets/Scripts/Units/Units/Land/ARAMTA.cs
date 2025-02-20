@@ -70,6 +70,8 @@ public class ARAMTA : MonoBehaviour
         ammo12mm = 1;
         distance = 100;
         healthPoint = maxHP;
+        intersection = 40 + Random.Range(-5, 10);
+        AttackCoolTime = 5 + Random.Range(-1.5f, 1.5f);
         spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
     }
 

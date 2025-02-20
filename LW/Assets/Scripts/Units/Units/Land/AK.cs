@@ -28,6 +28,15 @@ public class AK : MonoBehaviour
         anim.SetInteger("AK_anim", (int)1);
     }
 
+    private void OnEnable()
+    {
+        HP = 250;
+        moveSpeed = 1.5f;
+        AttackCoolTime = 1.1f;
+        intersection = 20f;
+        intersection = 10 + Random.Range(-5, 10);
+    }
+
     void Update()
     {
         if (HP < 0)

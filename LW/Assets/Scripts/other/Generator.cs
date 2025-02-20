@@ -57,10 +57,6 @@ public class Generator : MonoBehaviour
             MinusHealthPoint(-450);
         }
 
-        if (other.gameObject.CompareTag("500KG"))
-        {
-            MinusHealthPoint(-10000);
-        }
         if (other.gameObject.CompareTag("Rpg"))
         {
             MinusHealthPoint(-250);
@@ -76,6 +72,14 @@ public class Generator : MonoBehaviour
         if (other.gameObject.CompareTag("7.62mm"))
         {
             MinusHealthPoint(-10);
+        }
+        if (other.gameObject.CompareTag("TacNuke"))
+        {
+            MinusHealthPoint(-35000);
+        }
+        if (other.gameObject.CompareTag("AerialBomb"))
+        {
+            MinusHealthPoint(-5000);
         }
 
     }

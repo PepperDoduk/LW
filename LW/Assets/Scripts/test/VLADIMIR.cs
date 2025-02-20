@@ -63,6 +63,8 @@ public class VLADIMIR : MonoBehaviour
         anim.SetInteger("vlad", animNum);
         ammo12mm = 1;
         distance = 100;
+        intersection = 35 + Random.Range(-5, 10);
+        AttackCoolTime = 4 + Random.Range(-1.5f, 1.5f);
     }
 
     void Update()

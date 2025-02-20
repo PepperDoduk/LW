@@ -38,6 +38,8 @@ public class T14 : MonoBehaviour
         anim.SetInteger("T14_anim", (int)1);
     }
 
+
+
     void Update()
     {
         if (HP < 0)

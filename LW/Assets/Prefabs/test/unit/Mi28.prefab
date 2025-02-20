@@ -88,6 +88,7 @@ MonoBehaviour:
   antiAircraftRocket: {fileID: 2691967437828785481, guid: 7c19fb91a458a1b45aa448b80949feda, type: 3}
   airIntersection: 100
   distanceToAirUnit: 1000
+  audioSource: {fileID: 3983817779035286219}
 --- !u!82 &3983817779035286219
 AudioSource:
   m_ObjectHideFlags: 0
