@@ -8,81 +8,41 @@ public class Tutorial_Ebase : MonoBehaviour
     public float y;
     public float z;
     public Vector3[] unitSize;
+    public Vector3[] unitLocation;
 
-    private Vector3[] unitLocations;
+    private GameObject[] unit;
 
     public double unitValue;
-    public bool isTutorial;
-    private bool isEnemyProduce;
 
     void Start()
     {
-        isTutorial = true;
-        Tutorial1();
+        //InvokeRepeating("Enemy", 1f, Random.Range(2f, 7.5f));
+        Invoke("Enemy", 1f);
     }
 
-    private void Update()
+    void Enemy()
     {
-        if (!isTutorial)
-        {
-            Enemy();
-        }
-        
-    }
-
-    public IEnumerator Tutorial1()
-    {
-        for(int i=0; i<5; ++i)
-        {
-            Instantiate(Units[0], new Vector3(transform.position.x + x, transform.position.y + y, 0), Quaternion.identity);
-            yield return new WaitForSeconds(0.3f);
-        }
-        yield return new WaitForSeconds(5f);
-        StartCoroutine(Tutorial2());
-    }
-
-    public IEnumerator Tutorial2()
-    {
-        yield return new WaitForSeconds(0.3f);
-        Instantiate(Units[1], new Vector3(transform.position.x + x, transform.position.y + y, 0), Quaternion.identity);
-        yield return new WaitForSeconds(5f);
-        StartCoroutine(Tutorial3());
-    }
-
-    public IEnumerator Tutorial3()
-    {
-        yield return new WaitForSeconds(0.3f);
-        Instantiate(Units[2], new Vector3(transform.position.x + x, transform.position.y + y, 0), Quaternion.identity);
-        yield return new WaitForSeconds(5f);
-        TutorialEnd();
-    }
-
-    public void TutorialEnd()
-    {
-        isTutorial = false;
-    }
-
-    IEnumerator Enemy()
-    {
-        isEnemyProduce= true;
         int randomValue = Random.Range(0, 100);
 
         int unitIndex;
 
-        if (randomValue < 87)
+        if (randomValue < 85)
             unitIndex = 0;
-        else if (randomValue < 98)
+        else if (randomValue < 97)
             unitIndex = 1;
         else
             unitIndex = 2;
 
         if (Units[unitIndex] == null)
         {
-            yield break;
+            return;
         }
 
-        Instantiate(Units[unitIndex], new Vector3(transform.position.x + x, transform.position.y + y, 0), Quaternion.identity);
-        yield return new WaitForSeconds(Random.Range(1.0f,5.5f));
-        isEnemyProduce = false;
+        // GameObject unit = ObjectPoolManager.Instance.GetObjectFromPool(Units[unitIndex], Quaternion.identity, unitSize[unitIndex]);
+        // unit.transform.position = transform.position;
+
+        Instantiate(Units[unitIndex], transform.position + unitLocation[unitIndex], Quaternion.identity);
+
+        Invoke("Enemy", Random.Range(2f, 7.5f));
     }
 }

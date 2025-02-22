@@ -9680,7 +9680,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8653719598885068355, guid: 707f0647d4724df4cbf75805ac8bb27c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 707f0647d4724df4cbf75805ac8bb27c, type: 3}
       propertyPath: m_LocalScale.x
@@ -9791,15 +9791,19 @@ MonoBehaviour:
   duration: 1.3
   startRotation: {x: 0, y: 0, z: 0, w: 0}
   targetRotation: {x: 0, y: 0, z: 0, w: 0}
-  missilePrefab: {fileID: 0}
+  missilePrefab: {fileID: 4571602777164692695, guid: a8faa866989cea140884c2a25bfbbed4, type: 3}
   bombPrefab: {fileID: 4255276646883562535, guid: a35fe00e01107934ea523bafa5ae67a1, type: 3}
   bulletPrefab: {fileID: 0}
   sizeOfBomb: {x: 0.25, y: 0.25, z: 0.25}
   locationOfBomb: {x: 0, y: 0, z: 0}
+  sizeOfMissile: {x: 0, y: 0, z: 0}
+  locationOfMissile: {x: 0, y: 0, z: 0}
   distance: 0
   distanceToBase: 0
   animNum: 0
   speedNum: 1
+  airIntersection: 100
+  distanceToAirUnit: 500
 --- !u!95 &8288961987952582899
 Animator:
   serializedVersion: 7

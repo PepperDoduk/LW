@@ -28,14 +28,16 @@ public class GameManager : MonoBehaviour
     void OpenEscMenu()
     {
         esc.SetActive(true);
-        Time.timeScale = 0f;
         isEscPopup = true;
+        Time.timeScale = 0f;
+        
     }
 
     void CloseEscMenu()
     {
         esc.SetActive(false);
-        Time.timeScale = 1f;
         isEscPopup = false;
+        Time.timeScale = 1f;
+        
     }
 }

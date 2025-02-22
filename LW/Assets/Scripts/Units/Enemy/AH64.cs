@@ -548,6 +548,10 @@ public class AH64 : MonoBehaviour
         {
             MinusHP(-25000);
         }
+        if (other.gameObject.CompareTag("r-77"))
+        {
+            MinusHP(-3000);
+        }
 
     }
 

@@ -48,6 +48,7 @@ public class Audiomanager_prototype : MonoBehaviour
         RadioOn,
         RadioEnd,
         BrowningM2,
+        omg,
 
     }
 

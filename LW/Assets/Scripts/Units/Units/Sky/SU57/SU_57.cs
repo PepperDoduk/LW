@@ -39,7 +39,10 @@ public class SU_57 : MonoBehaviour
 
     [Header("Prefab Locate")]
     public Vector3 sizeOfBomb;
-    public Vector3 locationOfBomb;
+    public Vector3 locationOfBomb;    
+    
+    public Vector3 sizeOfMissile;
+    public Vector3 locationOfMissile;
 
     [Header("Distance Tracking")]
     public float distance;
@@ -49,6 +52,9 @@ public class SU_57 : MonoBehaviour
     public int animNum;
 
     public int speedNum = 1;
+
+    public float airIntersection = 70;
+    public float distanceToAirUnit;
 
     public static class AN
     {
@@ -60,10 +66,10 @@ public class SU_57 : MonoBehaviour
     }
     void Start()
     {
-        StartCoroutine("TakingOff");
+        StartCoroutine(TakingOff());
         startRotation = transform.rotation;
-        bomb = 5;
-        missile = 6;
+        bomb = 99999;
+        missile = 1;
         ammo = 100;
         flare = 3;
 
@@ -75,6 +81,22 @@ public class SU_57 : MonoBehaviour
         stop = false;
     }
 
+    public IEnumerator AntiAirRocketFire()
+    {
+        isAttack = true;
+        for (int i = 0; i < 2; ++i)
+        {
+            //missile--;
+            Audiomanager_prototype.instance.PlaySfx(Audiomanager_prototype.Sfx.TitanMissle);
+
+            GameObject antiAirRocket = ObjectPoolManager.Instance.GetObjectFromPool(missilePrefab, Quaternion.identity, new Vector3(0.2f, 0.2f, 0.2f));
+            antiAirRocket.transform.position = transform.position + locationOfMissile;
+            //antiAirRocket.transform.rotation = transform.rotation;
+            yield return new WaitForSeconds(0.4f);
+        }
+        yield return new WaitForSeconds(25f);
+        isAttack = false;
+    }
     void Update()
     {
 
@@ -82,6 +104,11 @@ public class SU_57 : MonoBehaviour
         {
             startRotation = transform.rotation;
             timeElapsed = 0f;
+        }
+
+        if (distanceToAirUnit <= airIntersection && !isAttack)
+        {
+            StartCoroutine(AntiAirRocketFire());
         }
 
         if (transform.transform.position.z !=0)
@@ -141,6 +168,7 @@ public class SU_57 : MonoBehaviour
         {
             LocateTarget();
             LocateBase();
+            LocateAirTarget();
         }
 
     }
@@ -167,7 +195,22 @@ public class SU_57 : MonoBehaviour
             }
         }
         distance = closestDistance;
-    } 
+    }
+
+    public void LocateAirTarget()
+    {
+        GameObject[] bases = GameObject.FindGameObjectsWithTag("AirEnemy");
+        float closestDistanceToAirUnit = Mathf.Infinity;
+        foreach (GameObject baseObj in bases)
+        {
+            float dist = Vector3.Distance(transform.position, baseObj.transform.position);
+            if (dist < closestDistanceToAirUnit)
+            {
+                closestDistanceToAirUnit = dist;
+            }
+        }
+        distanceToAirUnit = closestDistanceToAirUnit;
+    }
 
     public void LocateBase()
     {

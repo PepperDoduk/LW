@@ -8,7 +8,7 @@ public class MoneyUI : MonoBehaviour
     public int moneyLevel = 1;
 
     public Text moneyUI;
-    public Image needMoreMoney;
+    public GameObject needMoreMoney;
 
     private bool isFading = false;
 
@@ -41,39 +41,41 @@ public class MoneyUI : MonoBehaviour
 
     public void NeedMoreMoney()
     {
-        if (!isFading)
-        {
-            StartCoroutine(FadeInOut());
-        }
+        Audiomanager_prototype.instance.PlaySfx(Audiomanager_prototype.Sfx.omg);
+        needMoreMoney.SetActive(true);
+        //if (!isFading)
+        //{
+        //    StartCoroutine(FadeInOut());
+        //}
     }
 
-    IEnumerator FadeInOut()
-    {
-        needMoreMoney.gameObject.SetActive(true);
-        isFading = true;
+    //IEnumerator FadeInOut()
+    //{
+    //    needMoreMoney.gameObject.SetActive(true);
+    //    isFading = true;
 
-        float durationIn = 0.1f;
-        float durationOut = 0.2f;
+    //    float durationIn = 0.1f;
+    //    float durationOut = 0.2f;
 
-        Color color = needMoreMoney.color;
+    //    Color color = needMoreMoney.color;
 
-        for (float t = 0; t <= durationIn; t += Time.deltaTime)
-        {
-            color.a = Mathf.Lerp(0f, 1f, t / durationIn);
-            needMoreMoney.color = color;
-            yield return null;
-        }
+    //    for (float t = 0; t <= durationIn; t += Time.deltaTime)
+    //    {
+    //        color.a = Mathf.Lerp(0f, 1f, t / durationIn);
+    //        needMoreMoney.color = color;
+    //        yield return null;
+    //    }
 
-        yield return new WaitForSeconds(0.1f);
+    //    yield return new WaitForSeconds(0.1f);
 
-        for (float t = 0; t <= durationOut; t += Time.deltaTime)
-        {
-            color.a = Mathf.Lerp(1f, 0f, t / durationOut);
-            needMoreMoney.color = color;
-            yield return null;
-        }
+    //    for (float t = 0; t <= durationOut; t += Time.deltaTime)
+    //    {
+    //        color.a = Mathf.Lerp(1f, 0f, t / durationOut);
+    //        needMoreMoney.color = color;
+    //        yield return null;
+    //    }
 
-        isFading = false;
-        needMoreMoney.gameObject.SetActive(false);
-    }
+    //    isFading = false;
+    //    needMoreMoney.gameObject.SetActive(false);
+    //}
 }

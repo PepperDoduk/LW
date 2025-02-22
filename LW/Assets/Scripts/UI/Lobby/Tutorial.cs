@@ -11,6 +11,6 @@ public class Tutorial : MonoBehaviour
         button.color = new Color(0.11f, 0.11f, 0.11f, 1);
         text.color = Color.white;
         Audiomanager_prototype.instance.PlaySfx(Audiomanager_prototype.Sfx.MouseClick);
-        SceneManager.LoadScene("InGame");
+        SceneManager.LoadScene("Tutorial");
     }
 }

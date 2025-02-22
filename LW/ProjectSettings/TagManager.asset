@@ -37,6 +37,7 @@ TagManager:
   - AerialBomb
   - TacNuke
   - E12mm
+  - r-77
   layers:
   - Default
   - TransparentFX
