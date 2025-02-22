@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Generator : MonoBehaviour
+public class EbaseHP : MonoBehaviour
 {
 
     public float hp;
     // Start is called before the first frame update
     void Start()
     {
-        hp = 100000;
+        //hp = 100000;
     }
 
     // Update is called once per frame

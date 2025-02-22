@@ -24,7 +24,7 @@ public class M16: MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         HP = 250;
         AttackCoolTime = 2f;
-        intersection = 6f;
+        intersection = 20 + Random.Range(-5, 10);
         anim.SetInteger("M16_anim", (int)1);
     }
 

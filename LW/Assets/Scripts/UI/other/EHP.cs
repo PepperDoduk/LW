@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class EHP : MonoBehaviour
 {
     public Slider HPSlider;
-    public Generator hq;
+    public EbaseHP hq;
     float maxHp = 15000f; 
 
     // Start is called before the first frame update

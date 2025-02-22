@@ -47,6 +47,8 @@ public class Audiomanager_prototype : MonoBehaviour
         MouseClick,
         RadioOn,
         RadioEnd,
+        BrowningM2,
+
     }
 
     void Awake()

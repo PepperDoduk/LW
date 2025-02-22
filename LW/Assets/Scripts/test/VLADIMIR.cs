@@ -265,6 +265,10 @@ public class VLADIMIR : MonoBehaviour
         {
             MinusHP(-110);
         }
+        if (other.gameObject.CompareTag("E12mm"))
+        {
+            MinusHP(-40);
+        }
     }
 
 

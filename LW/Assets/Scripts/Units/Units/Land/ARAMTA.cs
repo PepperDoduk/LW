@@ -104,6 +104,7 @@ public class ARAMTA : MonoBehaviour
 
         if (distance <= intersection)
         {
+
             animNum = AN.Idle;
             StartCoroutine(Fire12mm());
 
@@ -298,6 +299,10 @@ public class ARAMTA : MonoBehaviour
         if (other.gameObject.CompareTag("E30mmHE"))
         {
             MinusHP(-110);
+        }
+        if (other.gameObject.CompareTag("E12mm"))
+        {
+            MinusHP(-40);
         }
     }
 

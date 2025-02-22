@@ -30,6 +30,10 @@ public class RPG : MonoBehaviour
 
         audioSource = GetComponent<AudioSource>();
     }
+    private void OnEnable()
+    {
+        intersection = 30 + Random.Range(-10, 5);
+    }
 
     void Update()
     {
@@ -121,6 +125,10 @@ public class RPG : MonoBehaviour
         if (other.gameObject.CompareTag("E762"))
         {
             MinusHealthPoint(-40);
+        }
+        if (other.gameObject.CompareTag("E12mm"))
+        {
+            MinusHealthPoint(-80);
         }
     }
 }

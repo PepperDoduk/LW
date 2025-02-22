@@ -9,10 +9,10 @@ public class HQ : MonoBehaviour
     void Start()
     {
         hp = 15000;
-        if (HQ_Info != null)
-        {
-            HQ_Info.SetActive(false);
-        }
+        //if (HQ_Info != null)
+        //{
+        //    HQ_Info.SetActive(false);
+        //}
     }
 
     void OnMouseDown()

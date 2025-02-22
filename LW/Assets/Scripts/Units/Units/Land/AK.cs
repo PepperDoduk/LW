@@ -120,5 +120,9 @@ public class AK : MonoBehaviour
         {
             MinusHealthPoint(-40);
         }
+        if (other.gameObject.CompareTag("E12mm"))
+        {
+            MinusHealthPoint(-80);
+        }
     }
 }
