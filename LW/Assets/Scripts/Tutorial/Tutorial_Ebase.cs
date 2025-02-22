@@ -26,9 +26,9 @@ public class Tutorial_Ebase : MonoBehaviour
 
         int unitIndex;
 
-        if (randomValue < 85)
+        if (randomValue < 82)
             unitIndex = 0;
-        else if (randomValue < 97)
+        else if (randomValue < 92)
             unitIndex = 1;
         else
             unitIndex = 2;
