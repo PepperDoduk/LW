@@ -3,7 +3,7 @@ using UnityEngine;
 public class HideSetting : MonoBehaviour
 {
     public GameObject[] uiObjects;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    
     void Start()
     {
         foreach (GameObject uiObject in uiObjects)
@@ -11,9 +11,9 @@ public class HideSetting : MonoBehaviour
             CanvasGroup canvasGroup = uiObject.GetComponent<CanvasGroup>();
             if (canvasGroup != null)
             {
-                canvasGroup.alpha = 0f; // 투명하게
-                canvasGroup.interactable = false; // 터치 비활성화
-                canvasGroup.blocksRaycasts = false; // 이벤트 차단 비활성화
+                canvasGroup.alpha = 0f;
+                canvasGroup.interactable = false; 
+                canvasGroup.blocksRaycasts = false;
             }
             else
             {
@@ -22,7 +22,6 @@ public class HideSetting : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         

@@ -182,7 +182,7 @@ MonoBehaviour:
   ammo12mm: 1
   ammoStriker: 1
   anim: {fileID: 0}
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 7148493421566222097}
   healthPoint: 0
   AttackCoolTime: 5
   bombPrefab: {fileID: 8683968501033214702, guid: 8801bdc99a83f8945ac43351823d522f, type: 3}

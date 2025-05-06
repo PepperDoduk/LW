@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using static ObjectPoolManager;
 
@@ -47,6 +48,8 @@ public class M1: MonoBehaviour
     public Vector3 sizeOfMuzzleFlash12;
     public Vector3 locationOfMuzzleFlash12;
 
+    private Slider slider;
+    GameObject sliderObject;
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -55,6 +58,10 @@ public class M1: MonoBehaviour
         AttackCoolTime = 6f;
         anim.SetInteger("M1_anim", (int)1);
         spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+
+        sliderObject = GameObject.Find("sfxSlider");
+        slider = sliderObject.GetComponent<Slider>();
+
     }
 
     private void OnEnable()
@@ -87,6 +94,10 @@ public class M1: MonoBehaviour
     }
     void Update()
     {
+        if (slider != null)
+        {
+            audioSource.volume = 0.3f * slider.value;
+        }
         if ((Time.frameCount % 50 == 0) && HP < 3000)
         {
             GameObject smoke = ObjectPoolManager.Instance.GetObjectFromPool(smokePrefab, Quaternion.identity, new Vector3(1, 1, 1));

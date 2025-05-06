@@ -3,6 +3,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public GameObject esc;
+    public GameObject setting;
     public bool isEscPopup = false;
     void Start()
     {

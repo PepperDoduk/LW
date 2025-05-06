@@ -1,10 +1,10 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SU_57 : MonoBehaviour
 {
     public Animator anim;
-
 
     [Header("Tags")]
     public string targetTag = "Enemy";
@@ -56,6 +56,10 @@ public class SU_57 : MonoBehaviour
     public float airIntersection = 70;
     public float distanceToAirUnit;
 
+    public AudioSource audioSource;
+    GameObject sliderObject;
+    private Slider slider;
+
     public static class AN
     {
         public const int Landed = -2;
@@ -66,6 +70,9 @@ public class SU_57 : MonoBehaviour
     }
     void Start()
     {
+        sliderObject = GameObject.Find("sfxSlider");
+        slider = sliderObject.GetComponent<Slider>();
+
         StartCoroutine(TakingOff());
         startRotation = transform.rotation;
         bomb = 99999;
@@ -79,10 +86,15 @@ public class SU_57 : MonoBehaviour
         isLanded = false;
         isAttacking = false;
         stop = false;
+
     }
 
     public IEnumerator AntiAirRocketFire()
     {
+        if (slider != null)
+        {
+            audioSource.volume = 0.3f * slider.value;
+        }
         isAttack = true;
         for (int i = 0; i < 2; ++i)
         {

@@ -118,17 +118,26 @@ public class RPG : MonoBehaviour
         {
             MinusHealthPoint(-500);
         }
-        if (other.gameObject.CompareTag("500KG"))
-        {
-            MinusHealthPoint(-10000);
-        }
         if (other.gameObject.CompareTag("E762"))
         {
-            MinusHealthPoint(-40);
+            MinusHealthPoint(-20);
+        }
+        if (other.gameObject.CompareTag("EBGM109"))
+        {
+            MinusHealthPoint(-6500);
+        }
+        if (other.gameObject.CompareTag("Estriker"))
+        {
+            MinusHealthPoint(-1000);
+        }
+        if (other.gameObject.CompareTag("E30mmHE"))
+        {
+            MinusHealthPoint(-110);
         }
         if (other.gameObject.CompareTag("E12mm"))
         {
-            MinusHealthPoint(-80);
+            MinusHealthPoint(-40);
         }
+
     }
 }

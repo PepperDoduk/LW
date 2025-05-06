@@ -2,6 +2,7 @@
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.XR;
 
 public class UICursorImage : MonoBehaviour
 {
@@ -23,6 +24,9 @@ public class UICursorImage : MonoBehaviour
     public Sprite IMSTA_prod;
     public Sprite IMi28_prod;
     public Sprite ISU57_prod;
+    public Sprite ITITAN_prod;
+    public Sprite UI_no;
+    public Sprite UI_yes;
 
     public float maxSize = 100f;
     public int Pos;
@@ -43,6 +47,9 @@ public class UICursorImage : MonoBehaviour
         uiImageMap["MSTA_prod"] = IMSTA_prod;
         uiImageMap["Mi28_prod"] = IMi28_prod;
         uiImageMap["SU57_prod"] = ISU57_prod;
+        uiImageMap["Titan_prod"] = ITITAN_prod;
+        uiImageMap["UIyes"] = UI_yes;
+        uiImageMap["UIno"] = UI_no;
     }
 
     void Update()
@@ -52,18 +59,18 @@ public class UICursorImage : MonoBehaviour
         {
             string uiName = uiObject.name;
 
-            if (uiImageMap.ContainsKey(uiName)&& isImageUI)  
+            if (uiName == "UIyes")
+            {
+                cursorImage.sprite = uiImageMap["UIyes"];
+                cursorImage.gameObject.SetActive(true);
+                cursorImage.transform.position = GetCursorPosition();
+                AdjustImageSize();
+            }
+            else if (uiImageMap.ContainsKey(uiName)&& isImageUI)  
             {
                 cursorImage.sprite = uiImageMap[uiName];
                 cursorImage.gameObject.SetActive(true);
-                if (Input.mousePosition.x > 960)
-                {
-                    cursorImage.transform.position = Input.mousePosition + new Vector3(-Pos, 0, 0);
-                }else
-                {
-                    cursorImage.transform.position = Input.mousePosition + new Vector3(Pos,0, 0); 
-                }
-
+                cursorImage.transform.position = GetCursorPosition();
                 AdjustImageSize();
             }
             else
@@ -74,6 +81,19 @@ public class UICursorImage : MonoBehaviour
         else
         {
             cursorImage.gameObject.SetActive(false); 
+        }
+    }
+
+
+    private Vector3 GetCursorPosition()
+    {
+        if (Input.mousePosition.x > 960)  
+        {
+            return Input.mousePosition + new Vector3(-Pos, 0, 0);
+        }
+        else
+        {
+            return Input.mousePosition + new Vector3(Pos, 0, 0);
         }
     }
 

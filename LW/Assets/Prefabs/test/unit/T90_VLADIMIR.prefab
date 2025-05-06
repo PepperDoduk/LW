@@ -205,6 +205,8 @@ MonoBehaviour:
   MuzzleFlashPrefab_12mm: {fileID: 8480172057056688032, guid: db8d4ffc7eba239489cecd56610cb365, type: 3}
   pool: {fileID: 7646926592098747169}
   ammo: 1
+  maxHP: 4500
+  smokePrefab: {fileID: 8381778075981485236, guid: 985353d9ce630ce4ba1f7c00ef6cd5da, type: 3}
 --- !u!61 &6990890888101417436
 BoxCollider2D:
   m_ObjectHideFlags: 0

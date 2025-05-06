@@ -3,8 +3,21 @@ using UnityEngine;
 public class Slider_disappear : MonoBehaviour
 {
     public GameObject[] uiObjects;
+    public GameObject[] leave;
 
-    public void OnClick()
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            OnClick();
+            if (leave != null)
+            {
+                for(int i=0; i<leave.Length; ++i)
+                leave[i].SetActive(false);
+            }
+        }
+    }
+        public void OnClick()
     {
         foreach (GameObject uiObject in uiObjects)
         {

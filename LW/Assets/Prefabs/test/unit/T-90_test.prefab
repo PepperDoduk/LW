@@ -701,7 +701,7 @@ MonoBehaviour:
   distance: 0
   intersection: 35
   anim: {fileID: 0}
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 652379587017215995}
   HP: 3000
   AttackCoolTime: 5
   pool: {fileID: 7025945590866140518}

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MSTA : MonoBehaviour
 {
@@ -57,6 +58,12 @@ public class MSTA : MonoBehaviour
     private bool isDied;
     private bool isMoving = false;
 
+    public float maxHP = 4500;
+    [SerializeField] private GameObject smokePrefab;
+    private SpriteRenderer[] spriteRenderers;
+    GameObject sliderObject;
+    private Slider slider;
+
     public static class AN
     {
         public const int DirectFire = -2;
@@ -65,67 +72,109 @@ public class MSTA : MonoBehaviour
         public const int Move = 1;
     }
 
-    void Start()
+    void OnEnable()
     {
         isDied = false;
         anim = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         shake = Camera.main.GetComponent<ScreenShake>();
-
         animNum = AN.Move;
         anim.SetInteger("msta", animNum);
         ammo12mm = 1;
+        distance = 100;
+        HP = maxHP;
+        intersection = 80 + Random.Range(-5, 10);
+        AttackCoolTime = 10 + Random.Range(-1.5f, 1.5f);
+        spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+        sliderObject = GameObject.Find("sfxSlider");
+        slider = sliderObject.GetComponent<Slider>();
     }
 
     void Update()
     {
+        if (slider != null)
+        {
+            audioSource.volume = 0.3f * slider.value;
+        }
         anim.SetInteger("msta", animNum);
 
         if (HP < 0)
         {
+            ApplyDarkenEffect();
             isDied = true;
             if (isDied)
                 Audiomanager_prototype.instance.PlaySfx(Audiomanager_prototype.Sfx.TankDestroy);
             StartCoroutine(pool.ReturnToPoolAfterDelay(0f));
             isDied = false;
         }
-
-        if (isCoolTime)
+        else
         {
-            animNum = AN.Idle;
-        }
-
-        if (Time.frameCount % 15 == 0)
-        {
-            FindClosestTarget();
-        }
-
-        if (distance <= intersection)
-        {
-            if(distance<25){
-                StartCoroutine(Fire12mm());
-            }
-            if (distance > 50 && !isCoolTime && ammo > 0)
+            ApplyDarkenEffect();
+            if ((Time.frameCount % 50 == 0) && HP < 2000)
             {
-                StartCoroutine(CurvedFire());
+                GameObject smoke = ObjectPoolManager.Instance.GetObjectFromPool(smokePrefab, Quaternion.identity, new Vector3(1, 1, 1));
+                smoke.transform.position = transform.position + new Vector3(-2, 3, 0);
             }
-            if(distance < 49 && !isCoolTime && ammo > 0)
-            {
-                StartCoroutine(DirectFire());
-            }
-        }
-        else if (distance > intersection && !isCoolTime)
-        {
-            animNum = AN.Move;
-            isCoolTime = false;
-            anim.SetInteger("msta", animNum);
 
-            Vector3 nowPosition = transform.position;
-            nowPosition.x += moveSpeed * Time.deltaTime;
-            transform.position = nowPosition;
+            if (isCoolTime)
+            {
+                animNum = AN.Idle;
+            }
+
+            if (Time.frameCount % 15 == 0)
+            {
+                FindClosestTarget();
+            }
+
+            if (distance <= intersection)
+            {
+                if (distance < 25)
+                {
+                    StartCoroutine(Fire12mm());
+                }
+                if (distance > 50 && !isCoolTime && ammo > 0)
+                {
+                    StartCoroutine(CurvedFire());
+                }
+                if (distance < 49 && !isCoolTime && ammo > 0)
+                {
+                    StartCoroutine(DirectFire());
+                }
+            }
+            else if (distance > intersection && !isCoolTime)
+            {
+                animNum = AN.Move;
+                isCoolTime = false;
+                anim.SetInteger("msta", animNum);
+
+                Vector3 nowPosition = transform.position;
+                nowPosition.x += moveSpeed * Time.deltaTime;
+                transform.position = nowPosition;
+            }
         }
     }
 
+    void SetColor(Color color)
+    {
+        foreach (var renderer in spriteRenderers)
+        {
+            renderer.color = color;
+        }
+    }
+    void ApplyDarkenEffect()
+    {
+        float hpRatio = Mathf.Clamp01(HP / maxHP);
+        if (hpRatio > 0.7f)
+        {
+            SetColor(Color.white);
+            return;
+        }
+        float normalizedRatio = Mathf.Clamp01(hpRatio / 0.7f);
+        float darkenAmount = Mathf.Lerp(1f, 0.3f, 1 - normalizedRatio);
+
+        Color darkenColor = new Color(darkenAmount, darkenAmount, darkenAmount, 1f);
+        SetColor(darkenColor);
+    }
     public void FindClosestTarget()
     {
         GameObject[] targets = GameObject.FindGameObjectsWithTag(targetTag);
@@ -304,6 +353,22 @@ public class MSTA : MonoBehaviour
         if (other.gameObject.CompareTag("E762"))
         {
             MinusHP(-20);
+        }
+        if (other.gameObject.CompareTag("EBGM109"))
+        {
+            MinusHP(-6500);
+        }
+        if (other.gameObject.CompareTag("Estriker"))
+        {
+            MinusHP(-1000);
+        }
+        if (other.gameObject.CompareTag("E30mmHE"))
+        {
+            MinusHP(-110);
+        }
+        if (other.gameObject.CompareTag("E12mm"))
+        {
+            MinusHP(-40);
         }
     }
 }

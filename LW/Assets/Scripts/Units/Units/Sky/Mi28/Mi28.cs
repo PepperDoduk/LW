@@ -290,7 +290,7 @@ public class Mi28 : MonoBehaviour
         }
     }
 
-    public IEnumerator MoveBack()
+    public IEnumerator MoveBack()   
     {
         if (isMoveBack)
             yield break;
@@ -409,17 +409,20 @@ public class Mi28 : MonoBehaviour
     }
     public IEnumerator LandBombing()
     {
-        for (int i = 0; i < 4; ++i)
+        if (transform.position.y > 8)
         {
-            missile--;
-            Audiomanager_prototype.instance.PlaySfx(Audiomanager_prototype.Sfx.TitanMissle);
-            GameObject rocket = ObjectPoolManager.Instance.GetObjectFromPool(rocketPrefab, Quaternion.identity, sizeOfRocket);
-            rocket.transform.position = transform.position + locationOfMissile;
-            rocket.transform.rotation = transform.rotation;
-            yield return new WaitForSeconds(0.4f);
+            for (int i = 0; i < 4; ++i)
+            {
+                missile--;
+                Audiomanager_prototype.instance.PlaySfx(Audiomanager_prototype.Sfx.TitanMissle);
+                GameObject rocket = ObjectPoolManager.Instance.GetObjectFromPool(rocketPrefab, Quaternion.identity, sizeOfRocket);
+                rocket.transform.position = transform.position + locationOfMissile;
+                rocket.transform.rotation = transform.rotation;
+                yield return new WaitForSeconds(0.4f);
+            }
+            yield return new WaitForSeconds(10f);
+            isAttack = false;
         }
-        yield return new WaitForSeconds(10f);
-        isAttack = false;
     }
 
     public void LocateTarget()

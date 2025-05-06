@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class M16: MonoBehaviour
@@ -17,6 +18,8 @@ public class M16: MonoBehaviour
     private bool isAttacking = false;
     public GameObject bullet;
     public ObjectPool pool;
+    GameObject sliderObject;
+    private Slider slider;
 
     void Start()
     {
@@ -26,10 +29,17 @@ public class M16: MonoBehaviour
         AttackCoolTime = 2f;
         intersection = 20 + Random.Range(-5, 10);
         anim.SetInteger("M16_anim", (int)1);
+
+        sliderObject = GameObject.Find("sfxSlider");
+        slider = sliderObject.GetComponent<Slider>();
     }
 
     void Update()
     {
+        if (slider != null)
+        {
+            audioSource.volume = 0.3f * slider.value;
+        }
         if (HP < 0)
         {
             //Destroy(gameObject,0.2f);

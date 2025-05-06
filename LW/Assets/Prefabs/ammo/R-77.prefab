@@ -5067,7 +5067,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 4571602777164692695}
-  disableTime: 15
+  disableTime: 6
 --- !u!61 &37116079910952034
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -5,20 +5,51 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-
     public float hp;
-    // Start is called before the first frame update
+    public float maxHp;
+    private SpriteRenderer[] spriteRenderers;
+    [SerializeField] private GameObject smokePrefab;
     void Start()
     {
-        hp = 15000;
+        maxHp = 15000;
+        hp = maxHp;
+        spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
     }
 
-    // Update is called once per frame
     void Update()
     {
+        ApplyDarkenEffect();
+        if ((Time.frameCount % 50 == 0) && hp < 7000)
+        {
+            GameObject smoke = ObjectPoolManager.Instance.GetObjectFromPool(smokePrefab, Quaternion.identity, new Vector3(1, 1, 1));
+            smoke.transform.position = transform.position + new Vector3(-2, 3, 0);
+        }
         if (hp < 0)
         {
             SceneManager.LoadScene("Defeat");
+        }
+    }
+
+    void ApplyDarkenEffect()
+    {
+        float hpRatio = Mathf.Clamp01(hp / maxHp);
+        if (hpRatio > 0.7f)
+        {
+            SetColor(Color.white);
+            return;
+        }
+        float normalizedRatio = Mathf.Clamp01(hpRatio / 0.7f);
+        float darkenAmount = Mathf.Lerp(1f, 0.3f, 1 - normalizedRatio);
+
+        Color darkenColor = new Color(darkenAmount, darkenAmount, darkenAmount, 1f);
+        SetColor(darkenColor);
+    }
+
+    void SetColor(Color color)
+    {
+        foreach (var renderer in spriteRenderers)
+        {
+            renderer.color = color;
         }
     }
 

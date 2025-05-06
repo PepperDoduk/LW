@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class VLADIMIR : MonoBehaviour
@@ -45,7 +46,13 @@ public class VLADIMIR : MonoBehaviour
 
     private bool isDied;
     private bool isMoving = false;
+    GameObject sliderObject;
+    private Slider slider;
 
+    public float maxHP = 4500;
+
+    [SerializeField] private GameObject smokePrefab;
+    private SpriteRenderer[] spriteRenderers;
     public static class AN
     {
         public const int Fire = -1;
@@ -53,23 +60,30 @@ public class VLADIMIR : MonoBehaviour
         public const int Move = 1;
     }
 
+
     void OnEnable()
     {
         isDied = false;
-        HealthPoint = 5000;
         anim = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         animNum = AN.Move;
         anim.SetInteger("vlad", animNum);
         ammo12mm = 1;
         distance = 100;
+        HealthPoint = maxHP;
         intersection = 35 + Random.Range(-5, 10);
         AttackCoolTime = 4 + Random.Range(-1.5f, 1.5f);
+        spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+        sliderObject = GameObject.Find("sfxSlider");
+        slider = sliderObject.GetComponent<Slider>();
     }
 
     void Update()
     {
-
+        if (slider != null)
+        {
+            audioSource.volume = 0.3f * slider.value;
+        }
 
         anim.SetInteger("vlad", animNum);
 
@@ -82,6 +96,12 @@ public class VLADIMIR : MonoBehaviour
             isDied = false;
         }
 
+        ApplyDarkenEffect();
+        if ((Time.frameCount % 50 == 0) && HealthPoint < 2000)
+        {
+            GameObject smoke = ObjectPoolManager.Instance.GetObjectFromPool(smokePrefab, Quaternion.identity, new Vector3(1, 1, 1));
+            smoke.transform.position = transform.position + new Vector3(-2, 3, 0);
+        }
 
         if (Time.frameCount % 15 == 0)
         {
@@ -112,6 +132,27 @@ public class VLADIMIR : MonoBehaviour
         }
     }
 
+    void SetColor(Color color)
+    {
+        foreach (var renderer in spriteRenderers)
+        {
+            renderer.color = color;
+        }
+    }
+    void ApplyDarkenEffect()
+    {
+        float hpRatio = Mathf.Clamp01(HealthPoint / maxHP);
+        if (hpRatio > 0.7f)
+        {
+            SetColor(Color.white);
+            return;
+        }
+        float normalizedRatio = Mathf.Clamp01(hpRatio / 0.7f);
+        float darkenAmount = Mathf.Lerp(1f, 0.3f, 1 - normalizedRatio);
+
+        Color darkenColor = new Color(darkenAmount, darkenAmount, darkenAmount, 1f);
+        SetColor(darkenColor);
+    }
     void FindClosestTarget()
     {
         GameObject[] targets = GameObject.FindGameObjectsWithTag(targetTag);

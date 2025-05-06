@@ -1,19 +1,30 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.Audio;
 
 public class Tu160 : MonoBehaviour
 {
     public float moveSpeed;
     public ScreenShake shake;
     public GameObject target;
+    public AudioSource audioSource;
+
+    GameObject sliderObject;
+    private Slider slider;
     private void OnEnable()
     {
-        
+        sliderObject = GameObject.Find("sfxSlider");
+        slider = sliderObject.GetComponent<Slider>();
         StartCoroutine(Bombing());
     }
 
     private void Update()
     {
+        if (slider != null)
+        {
+            audioSource.volume = 0.3f * slider.value;
+        }
         Vector3 nowPosition = transform.position;
         nowPosition.x += moveSpeed * Time.deltaTime;
         transform.position = nowPosition;

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &7376212295810952580
+--- !u!1001 &2382330081432479196
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -134,36 +134,39 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: 5c9a362260db90d498ecb49f7143f302, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7531093193140533426}
+      addedObject: {fileID: 3445816447420100842}
     - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: 5c9a362260db90d498ecb49f7143f302, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7054228550148309653}
+      addedObject: {fileID: 2789850137096014541}
     - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: 5c9a362260db90d498ecb49f7143f302, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 995374695175963744}
+      addedObject: {fileID: 5368966492598357048}
     - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: 5c9a362260db90d498ecb49f7143f302, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 417591165480732721}
+      addedObject: {fileID: 4799071821330546793}
     - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: 5c9a362260db90d498ecb49f7143f302, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -5455968039102502072}
+      addedObject: {fileID: 8294134557134136080}
     - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: 5c9a362260db90d498ecb49f7143f302, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1838188039685170443}
+      addedObject: {fileID: 6832137512780229971}
+    - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: 5c9a362260db90d498ecb49f7143f302, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -5626899105512306172}
   m_SourcePrefab: {fileID: 4843985084834002234, guid: 5c9a362260db90d498ecb49f7143f302, type: 3}
---- !u!1 &7042044180867091513 stripped
+--- !u!1 &2803617527741809761 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8653719598885068355, guid: 5c9a362260db90d498ecb49f7143f302, type: 3}
-  m_PrefabInstance: {fileID: 7376212295810952580}
+  m_PrefabInstance: {fileID: 2382330081432479196}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &7531093193140533426
+--- !u!95 &3445816447420100842
 Animator:
   serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7042044180867091513}
+  m_GameObject: {fileID: 2803617527741809761}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 90ecf0e105ea1bd469448f9c577581f3, type: 2}
@@ -178,13 +181,13 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7054228550148309653
+--- !u!114 &2789850137096014541
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7042044180867091513}
+  m_GameObject: {fileID: 2803617527741809761}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22758f7c8b0246f4a8b5fe744c7e4226, type: 3}
@@ -207,7 +210,7 @@ MonoBehaviour:
   animNum: 0
   ammo12mm: 1
   anim: {fileID: 0}
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 4799071821330546793}
   HP: 4500
   AttackCoolTime: 10
   bombPrefab_curve: {fileID: 8683968501033214702, guid: c9c842ec802fb9445a25deb2f80cb998, type: 3}
@@ -216,29 +219,31 @@ MonoBehaviour:
   shake: {fileID: 0}
   MuzzleFlashPrefab_152mm: {fileID: 8912767448822040767, guid: 4dad670181441ad49a879e7b1693a638, type: 3}
   MuzzleFlashPrefab_12mm: {fileID: 8480172057056688032, guid: db8d4ffc7eba239489cecd56610cb365, type: 3}
-  pool: {fileID: 995374695175963744}
+  pool: {fileID: 5368966492598357048}
   ammo: 1
---- !u!114 &995374695175963744
+  maxHP: 4500
+  smokePrefab: {fileID: 8381778075981485236, guid: 985353d9ce630ce4ba1f7c00ef6cd5da, type: 3}
+--- !u!114 &5368966492598357048
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7042044180867091513}
+  m_GameObject: {fileID: 2803617527741809761}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d8a184113f50a54f95468e47ed4b875, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 7042044180867091513}
+  prefab: {fileID: 2803617527741809761}
   disableTime: -1
---- !u!82 &417591165480732721
+--- !u!82 &4799071821330546793
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7042044180867091513}
+  m_GameObject: {fileID: 2803617527741809761}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
@@ -329,25 +334,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!210 &-5455968039102502072
+--- !u!210 &8294134557134136080
 SortingGroup:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7042044180867091513}
+  m_GameObject: {fileID: 2803617527741809761}
   m_Enabled: 1
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -4
   m_SortAtRoot: 0
---- !u!61 &1838188039685170443
+--- !u!61 &6832137512780229971
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7042044180867091513}
+  m_GameObject: {fileID: 2803617527741809761}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
@@ -387,3 +392,30 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 19.095844, y: 8.0765915}
   m_EdgeRadius: 0
+--- !u!50 &-5626899105512306172
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2803617527741809761}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

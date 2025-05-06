@@ -38,17 +38,21 @@ public class Kh_38 : MonoBehaviour
         startRotation = transform.rotation;
 
         shake = Camera.main.GetComponent<ScreenShake>();
-        rb = GetComponent<Rigidbody2D>();
+
         StartCoroutine("Attack");
     }
 
     void OnEnable()
     {
+        transform.rotation = Quaternion.Euler(0f, 0, 0);
         //isAreadyExploded = false;
         timeElapsed = 0;
         moveSpeed = 10f;
         startRotation = transform.rotation;
-
+        rb = GetComponent<Rigidbody2D>();
+        rb.linearVelocity = Vector2.zero;
+        rb.angularVelocity = 0f;
+        //rb.gravityScale = 0f;
         shake = Camera.main.GetComponent<ScreenShake>();
         rb = GetComponent<Rigidbody2D>();
         StartCoroutine("Attack");

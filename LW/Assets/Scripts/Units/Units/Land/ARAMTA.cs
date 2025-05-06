@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class ARAMTA : MonoBehaviour
@@ -51,6 +52,9 @@ public class ARAMTA : MonoBehaviour
     public float maxHP = 8000;
     [SerializeField] private GameObject smokePrefab;
 
+    GameObject sliderObject;
+    private Slider slider;
+
     public static class AN
     {
         public const int Fire = -1;
@@ -73,10 +77,16 @@ public class ARAMTA : MonoBehaviour
         intersection = 40 + Random.Range(-5, 10);
         AttackCoolTime = 5 + Random.Range(-1.5f, 1.5f);
         spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+        sliderObject = GameObject.Find("sfxSlider");
+        slider = sliderObject.GetComponent<Slider>();
     }
 
     void Update()
     {
+        if (slider != null)
+        {
+            audioSource.volume = 0.3f * slider.value;
+        }
         if (healthPoint < 0)
         {
             isDied = true;
