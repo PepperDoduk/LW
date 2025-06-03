@@ -9,7 +9,7 @@ public class ObjectPoolManager : MonoBehaviour
     public class Pool
     {
         public GameObject prefab;
-        public int size;//관리되는 프리팹들의 수
+        public int size;
     }
 
     [SerializeField] private Pool[] pools;
@@ -17,10 +17,10 @@ public class ObjectPoolManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null) //싱글톤 ?
+        if (Instance == null)
         {
             Instance = this;
-            InitializePool(); // 풀 초기화
+            InitializePool();
         }
         else
         {
